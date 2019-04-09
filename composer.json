@@ -1,0 +1,8 @@
+{
+    "require": {
+        "piwik/device-detector": "dev-master",
+        "doctrine/cache": "^1.8",
+        "symfony/cache": "^4.2",
+        "ext-json": "*"
+    }
+}
