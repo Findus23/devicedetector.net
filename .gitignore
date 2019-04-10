@@ -2,3 +2,4 @@
 vendor/
 tmp/
 config.ini
+public/version.json

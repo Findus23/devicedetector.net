@@ -12,7 +12,7 @@
 <script lang="ts">
     import Vue from 'vue';
 
-    const baseURL = 'http://localhost/devicedetector.net/api.php';
+    const baseURL = 'http://local.devicedetector.net/detect/';
 
     export default Vue.extend({
         name: 'Main',

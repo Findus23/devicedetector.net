@@ -28,7 +28,7 @@ $cacheloader = new CacheLoader();
 
 $item = $cacheloader->cache->getItem("supported");
 
-if ($item->isHit() and false) {
+if ($item->isHit()) {
     $data = $item->get();
 } else {
 
