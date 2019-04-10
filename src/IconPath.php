@@ -51,6 +51,10 @@ class IconPath {
      * @throws \Exception
      */
     public function getBrowserLogo() {
+        $client = $this->dd->getClient();
+        if (empty($client["shortname"])) {
+            return null;
+        }
         $short = $this->dd->getClient()["short_name"];
         $path = '/icons/browsers/%s.png';
 
@@ -79,6 +83,9 @@ class IconPath {
      */
     public function getDeviceTypeLogo() {
         $label = $this->dd->getDeviceName();
+        if (empty($label)) {
+            return null;
+        }
         $label = strtolower($label);
         $label = str_replace(' ', '_', $label);
 
@@ -92,8 +99,11 @@ class IconPath {
      */
     function getOsLogo() {
         $path = '/icons/os/%s.png';
-
-        $short = $this->dd->getOs()["short_name"];
+        $client = $this->dd->getClient();
+        if (empty($client["shortname"])) {
+            return null;
+        }
+        $short = $client["short_name"];
 
         $family = OperatingSystem::getOsFamily($short);
         $osFamilies = OperatingSystem::getAvailableOperatingSystemFamilies();

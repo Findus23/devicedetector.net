@@ -19,6 +19,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {Version} from "@/interfaces";
 
   const versionJSON = 'http://local.devicedetector.net/version.json';
 
@@ -40,7 +41,7 @@
       req.onreadystatechange = (event: Event): void => {
         if (req.readyState === XMLHttpRequest.DONE) {
           if (req.status === 200) {
-            const data = JSON.parse(req.responseText);
+            const data:Version = JSON.parse(req.responseText);
             console.log(data);
             this.commitHash = data.commitHash;
             this.lastUpdated = new Date(data.date);
