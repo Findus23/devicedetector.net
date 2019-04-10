@@ -32,15 +32,21 @@ $dd = new DeviceDetector($userAgent);
 
 $cacheloader->configureDeviceDetector($dd);
 $dd->parse();
+$icons = new IconPath($dd);
 $data = [];
 $data["isBot"] = $dd->isBot();
 if ($dd->isBot()) {
     $data["botInfo"] = $dd->getBot();
 } else {
     $data["clientInfo"] = $dd->getClient();
+    $data["browserIcon"] = $icons->getBrowserLogo();
     $data["osInfo"] = $dd->getOs();
+    $data["osIcon"] = $icons->getOsLogo();
+    $data["device"] = $dd->getDevice();
     $data["deviceName"] = $dd->getDeviceName();
+    $data["deviceIcon"] = $icons->getDeviceTypeLogo();
     $data["deviceBrand"] = $dd->getBrandName();
+    $data["brandIcon"] = $icons->getBrandLogo();
     $data["model"] = $dd->getModel();
 }
 
