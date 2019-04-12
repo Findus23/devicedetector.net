@@ -8,6 +8,8 @@ cache:
   - vendor/
 
 before_script:
+  - apt update
+  - apt install -y redis-server
   - composer install
   - php -S localhost:9000 -t public &
 
