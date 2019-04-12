@@ -42,7 +42,7 @@ class IconPath {
                 return $name;
             }
         }
-        throw new \Exception("TEST");
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class IconPath {
      */
     public function getBrowserLogo() {
         $client = $this->dd->getClient();
-        if (empty($client["shortname"])) {
+        if (empty($client["short_name"])) {
             return null;
         }
         $short = $this->dd->getClient()["short_name"];
@@ -99,8 +99,8 @@ class IconPath {
      */
     function getOsLogo() {
         $path = '/icons/os/%s.png';
-        $client = $this->dd->getClient();
-        if (empty($client["shortname"])) {
+        $client = $this->dd->getOs();
+        if (empty($client["short_name"])) {
             return null;
         }
         $short = $client["short_name"];

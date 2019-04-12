@@ -1,0 +1,20 @@
+<template>
+    <img v-if="icon" :src="'http://local.devicedetector.net'+icon" :title="title"
+         role="presentation" :alt="title" class="icon" width="48" height="48">
+</template>
+<script lang="ts">
+    import Vue from "vue";
+
+    export default Vue.extend({
+        props: ["icon", "title"],
+        name: "Icon"
+    });
+</script>
+
+<style lang="scss">
+    .icon {
+        width: 48px;
+        height: 48px;
+        vertical-align: middle;
+    }
+</style>
