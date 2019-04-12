@@ -22,8 +22,6 @@ $version = [
 
 file_put_contents("public/version.json", json_encode($version, JSON_PRETTY_PRINT));
 
-if (!getenv("CI_JOB_ID")) {
-    $cacheLoader = new CacheLoader();
-    $cacheLoader->cache->clear();
-    echo "Cache cleared\n";
-}
+$cacheLoader = new CacheLoader();
+$cacheLoader->cache->clear();
+echo "Cache cleared\n";

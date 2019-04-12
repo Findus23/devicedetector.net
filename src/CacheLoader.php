@@ -10,7 +10,11 @@ class CacheLoader {
 
     public function __construct() {
         $redis = new \Redis();
-        $redis->connect('127.0.0.1');
+        if (getenv("CI_JOB_ID")) {
+            $redis->connect('redis');
+        } else {
+            $redis->connect('127.0.0.1');
+        }
         $redis->select(9);
         $this->cache = new RedisAdapter($redis, 'device_detector_net');
     }
