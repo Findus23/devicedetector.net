@@ -53,52 +53,71 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {ParsedData} from "@/interfaces";
-import Icon from "./Icon.vue";
+    import Vue from "vue";
+    import {ParsedData} from "@/interfaces";
+    import Icon from "./Icon.vue";
 
-const baseURL = "/detect/";
+    const baseURL = "/detect/";
 
-export default Vue.extend({
-    name: "Main",
-    props: {
-        msg: String
-    },
-    components: {
-        icon: Icon
-    },
-    data() {
-        return {
-            userAgent: navigator.userAgent,
-            dd: {} as ParsedData,
-            gotData: false,
-            processingServerSide: false
-        };
-    },
-    computed: {
-        prettyJSON(): string {
-            return JSON.stringify(this.dd, null, 2);
-        }
-    },
-    methods: {
-        submit(): void {
-            this.gotData = false;
-            this.processingServerSide = true;
-            const req = new XMLHttpRequest();
-            req.onreadystatechange = (event: Event): void => {
-                if (req.readyState === XMLHttpRequest.DONE) {
-                    if (req.status === 200) {
-                        this.dd = JSON.parse(req.responseText);
-                        this.gotData = true;
-                        this.processingServerSide = false;
-                    }
-                }
+    export default Vue.extend({
+        name: "Main",
+        props: {
+            ua: String
+        },
+        components: {
+            Icon
+        },
+        data() {
+            return {
+                userAgent: this.ua ? this.ua : navigator.userAgent,
+                dd: {} as ParsedData,
+                gotData: false,
+                processingServerSide: false
             };
-            req.open("GET", baseURL + "?ua=" + this.userAgent, true);
-            req.send(null);
+        },
+        computed: {
+            prettyJSON(): string {
+                return JSON.stringify(this.dd, null, 2);
+            }
+        },
+        methods: {
+            submit(): void {
+                this.$router.replace({name: "main", params: {"ua": this.userAgent}});
+            },
+            fetchData(ua: string): void {
+                this.gotData = false;
+                this.processingServerSide = true;
+                const req = new XMLHttpRequest();
+                req.onreadystatechange = (event: Event): void => {
+                    if (req.readyState === XMLHttpRequest.DONE) {
+                        if (req.status === 200) {
+                            this.dd = JSON.parse(req.responseText);
+                            this.gotData = true;
+                            this.processingServerSide = false;
+                        }
+                    }
+                };
+                req.open("GET", baseURL + "?ua=" + ua, true);
+                req.send(null);
+            }
+        },
+        watch: {
+            ua(val: string): void {
+                if (!val) {
+                    this.submit();
+                } else {
+                    this.fetchData(val);
+                }
+            }
+        },
+        mounted(): void {
+            if (this.ua) {
+                this.fetchData(this.ua);
+            } else {
+                this.submit();
+            }
         }
-    }
-});
+    });
 </script>
 
 

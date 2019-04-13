@@ -1,20 +1,23 @@
 module.exports = {
-    outputDir: "../public/dist",
-    indexPath: "../",
     devServer: {
         proxy: {
             '^/detect/': {
-                target: 'http://local.devicedetector.net/detect/',
+                target: 'http://local.devicedetector.net/',
                 changeOrigin: true
             },
             '^/supported/': {
-                target: 'http://local.devicedetector.net/supported/',
+                target: 'http://local.devicedetector.net/',
                 changeOrigin: true
             },
             '^/version.json': {
-                target: 'http://local.devicedetector.net/version.json',
+                target: 'http://local.devicedetector.net/',
+                changeOrigin: true
+            },
+            '^/icons': {
+                target: 'http://local.devicedetector.net/',
                 changeOrigin: true
             }
+
         }
     }
 };

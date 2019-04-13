@@ -3,14 +3,14 @@
         <div class="content">
             <div>
                 <b-navbar toggleable="lg" type="dark">
-                    <b-navbar-brand to="/main">Device Detector</b-navbar-brand>
+                    <b-navbar-brand :to="{name:'main'}">Device Detector</b-navbar-brand>
 
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                     <b-collapse id="nav-collapse" is-nav>
                         <b-navbar-nav>
-                            <b-nav-item to="/main">Home</b-nav-item>
-                            <b-nav-item to="/about">About</b-nav-item>
+                            <b-nav-item :to="{name:'main'}">Home</b-nav-item>
+                            <b-nav-item :to="{name:'about'}">About</b-nav-item>
                         </b-navbar-nav>
 
                         <!-- Right aligned nav items -->
@@ -45,15 +45,8 @@
 <script lang="ts">
     import Vue from "vue";
     import {Version} from "@/interfaces";
-    // @ts-ignore
-    import Navbar from "bootstrap-vue/es/components/navbar";
-    // @ts-ignore
-    import Bcontainer from "bootstrap-vue/es/components/layout";
 
-    Vue.use(Navbar);
-    Vue.use(Bcontainer);
-
-    const versionJSON = "http://local.devicedetector.net/version.json";
+    const versionJSON = "/version.json";
 
     export default Vue.extend({
         name: "Main",
@@ -74,7 +67,6 @@
                 if (req.readyState === XMLHttpRequest.DONE) {
                     if (req.status === 200) {
                         const data: Version = JSON.parse(req.responseText);
-                        console.log(data);
                         this.commitHash = data.commitHash;
                         this.lastUpdated = new Date(data.date);
                     }

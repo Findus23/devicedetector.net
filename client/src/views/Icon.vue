@@ -1,5 +1,5 @@
 <template>
-    <img v-if="icon" :src="'http://local.devicedetector.net'+icon" :title="title"
+    <img v-if="icon" :src="icon" :title="title"
          role="presentation" :alt="title" class="icon" width="48" height="48">
 </template>
 <script lang="ts">
