@@ -4,3 +4,7 @@ tmp/
 config.ini
 public/version.json
 matomo-icons/
+public/css/
+public/img/
+public/js/
+public/index.html
