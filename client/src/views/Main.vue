@@ -1,52 +1,59 @@
 <template>
     <div class="main">
-        <h1>Main</h1>
+        <h1>Device Detector Demo</h1>
         <form @submit.prevent="submit">
-            <b-form-input type="text" v-model="userAgent" :disabled="processingServerSide"></b-form-input>
-            <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
+            <b-input-group class="mt-3">
+                <b-form-input type="text" v-model="userAgent" :disabled="processingServerSide"></b-form-input>
+                <b-input-group-append>
+                    <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
+                </b-input-group-append>
+            </b-input-group>
         </form>
         <div v-if="gotData">
-            <div v-if="!dd.clientInfo && !dd.botInfo" class="box">
+            <div v-if="!dd.clientInfo && !dd.botInfo" class="box centered">
                 Device Detecter couldn't detect any information about this user agent.
             </div>
-            <div v-if="dd.isBot" class="box">
+            <div v-if="dd.isBot" class="box centered">
                 <a :href="dd.botInfo.url">{{dd.botInfo.name}}</a>
                 <span>{{dd.botInfo.category}}</span>
                 <a :href="dd.botInfo.producer.url">{{dd.botInfo.producer.name}}</a>
             </div>
             <div v-else>
-                <b-row>
-                    <b-col class="box">
+                <div class="box-row">
+                    <div class="box centered">
                         <div v-if="dd.osInfo">
-                            <icon :title="dd.osInfo.short_name" :icon="dd.osIcon"></icon>
+                            <icon :title="dd.osInfo.short_name" :icon="dd.icons.os"></icon>
                             <div>{{dd.osInfo.name}} {{dd.osInfo.version}}</div>
                             <div>{{dd.osInfo.platform}}</div>
                         </div>
-                    </b-col>
-                    <b-col class="box last">
-                        <icon :title="dd.clientInfo.short_name" :icon="dd.browserIcon"></icon>
+                    </div>
+                    <div class="box last centered">
+                        <icon :title="dd.clientInfo.short_name" :icon="dd.icons.browser"></icon>
                         <div>{{dd.clientInfo.name}} {{dd.clientInfo.version}}</div>
                         <div v-if="dd.clientInfo.engine">{{dd.clientInfo.engine}} {{dd.clientInfo.engine_version}}</div>
-                    </b-col>
-                </b-row>
-                <b-row>
-                    <b-col class="box" v-if="dd.deviceBrand">
-                        <icon :title="dd.deviceBrand" :icon="dd.brandIcon"></icon>
+                    </div>
+                </div>
+                <div class="box-row">
+                    <div class="box centered" v-if="dd.deviceBrand">
+                        <icon :title="dd.deviceBrand" :icon="dd.icons.brand"></icon>
                         <div>
                             {{dd.deviceBrand}}
                         </div>
-                    </b-col>
-                    <b-col :class="{box:true, last:dd.deviceBrand}">
-                        <icon :title="dd.deviceName" :icon="dd.deviceIcon"></icon>
+                    </div>
+                    <div :class="{box:true, centered:true, last:dd.deviceBrand}">
+                        <icon :title="dd.deviceName" :icon="dd.icons.device"></icon>
                         <div>{{dd.deviceName}}</div>
-                    </b-col>
-                </b-row>
+                    </div>
+                </div>
             </div>
         </div>
         <div v-if="gotData">
-            <b-button v-b-toggle.collapse-1 variant="primary">Toggle Collapse</b-button>
-            <b-collapse id="collapse-1" class="mt-2 box">
-                <pre><code style="text-align: left">{{prettyJSON}}</code></pre>
+            <b-button variant="primary" :aria-expanded="showJSON ? true : false"
+                      @click="showJSON=!showJSON">
+                Show Device Detector response
+            </b-button>
+            <b-collapse id="collapse-1" class="mt-2 box" v-model="showJSON">
+                <pre><code style="text-align: left" v-html="prettyJSON"></code></pre>
             </b-collapse>
         </div>
     </div>
@@ -55,7 +62,8 @@
 <script lang="ts">
     import Vue from "vue";
     import {ParsedData} from "@/interfaces";
-    import Icon from "./Icon.vue";
+    import Icon from "../components/Icon.vue";
+    import {syntaxHighlight} from "../../utils";
 
     const baseURL = "/detect/";
 
@@ -72,12 +80,13 @@
                 userAgent: this.ua ? this.ua : navigator.userAgent,
                 dd: {} as ParsedData,
                 gotData: false,
-                processingServerSide: false
+                processingServerSide: false,
+                showJSON: false
             };
         },
         computed: {
             prettyJSON(): string {
-                return JSON.stringify(this.dd, null, 2);
+                return syntaxHighlight(JSON.stringify(this.dd, null, 2));
             }
         },
         methods: {
@@ -108,6 +117,9 @@
                 } else {
                     this.fetchData(val);
                 }
+            },
+            showJSON(newValue: boolean): void {
+                localStorage.showJSON = newValue;
             }
         },
         mounted(): void {
@@ -115,6 +127,9 @@
                 this.fetchData(this.ua);
             } else {
                 this.submit();
+            }
+            if (localStorage.showJSON) {
+                this.showJSON = !!localStorage.showJSON;
             }
         }
     });
@@ -124,5 +139,27 @@
 <style lang="scss">
     pre {
         margin: 0;
+
+        .string {
+            color: #880000;
+        }
+
+        .number {
+            color: darkorange;
+        }
+
+        .boolean {
+            color: #78A960;
+            font-weight: bold
+        }
+
+        .null {
+            color: #999;
+            font-weight: bold
+        }
+
+        .key {
+            color: black;
+        }
     }
 </style>

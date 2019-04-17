@@ -39,15 +39,17 @@ if ($dd->isBot()) {
     $data["botInfo"] = $dd->getBot();
 } else {
     $data["clientInfo"] = $dd->getClient();
-    $data["browserIcon"] = $icons->getBrowserLogo();
     $data["osInfo"] = $dd->getOs();
-    $data["osIcon"] = $icons->getOsLogo();
     $data["device"] = $dd->getDevice();
     $data["deviceName"] = $dd->getDeviceName();
-    $data["deviceIcon"] = $icons->getDeviceTypeLogo();
     $data["deviceBrand"] = $dd->getBrandName();
-    $data["brandIcon"] = $icons->getBrandLogo();
     $data["model"] = $dd->getModel();
+    $data["icons"] = [
+        "browser" => $icons->getBrowserLogo(),
+        "os" => $icons->getOsLogo(),
+        "device" => $icons->getDeviceTypeLogo(),
+        "brand" => $icons->getBrandLogo()
+    ];
 }
 
 header("Content-Type: application/json; charset=UTF-8");

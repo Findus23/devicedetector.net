@@ -4,7 +4,7 @@ namespace DeviceDetectorNet;
 
 require_once 'vendor/autoload.php';
 
-system("composer update");
+system("composer update piwik/device-detector");
 
 $lockstring = file_get_contents("composer.lock");
 $composerLock = json_decode($lockstring, true);
