@@ -45,6 +45,9 @@
 <script lang="ts">
     import Vue from "vue";
     import {Version} from "@/interfaces";
+    // @ts-ignore
+    import Navbar from "bootstrap-vue/es/components/navbar";
+    Vue.use(Navbar);
 
     const versionJSON = "/version.json";
 

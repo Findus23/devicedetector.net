@@ -4,9 +4,6 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-// @ts-ignore
-import Navbar from "bootstrap-vue/es/components/navbar";
-Vue.use(Navbar);
 
 export default Vue.extend({
     props: ["icon", "title"],
@@ -18,6 +15,5 @@ export default Vue.extend({
     .icon {
         width: 48px;
         height: 48px;
-        vertical-align: middle;
     }
 </style>

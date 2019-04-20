@@ -50,7 +50,7 @@
             </div>
         </div>
         <div v-if="gotData">
-            <b-button variant="primary" :aria-expanded="showJSON ? true : false"
+            <b-button variant="primary" :aria-expanded="showJSON"
                       @click="showJSON=!showJSON">
                 Show Device Detector response
             </b-button>
