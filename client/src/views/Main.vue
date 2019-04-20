@@ -13,10 +13,10 @@
             <div v-if="!dd.clientInfo && !dd.botInfo" class="box centered">
                 Device Detecter couldn't detect any information about this user agent.
             </div>
-            <div v-if="dd.isBot" class="box centered">
-                <a :href="dd.botInfo.url">{{dd.botInfo.name}}</a>
-                <span>{{dd.botInfo.category}}</span>
-                <a :href="dd.botInfo.producer.url">{{dd.botInfo.producer.name}}</a>
+            <div v-else-if="dd.isBot" class="box centered">
+                <div><a :href="dd.botInfo.url">{{dd.botInfo.name}}</a></div>
+                <div>{{dd.botInfo.category}}</div>
+                <div><a :href="dd.botInfo.producer.url">{{dd.botInfo.producer.name}}</a></div>
             </div>
             <div v-else>
                 <div class="box-row">
@@ -60,79 +60,87 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import {ParsedData} from "@/interfaces";
-    import Icon from "../components/Icon.vue";
-    import {syntaxHighlight} from "../../utils";
+import Vue from "vue";
+import {ParsedData} from "@/interfaces";
+import Icon from "../components/Icon.vue";
+import {syntaxHighlight} from "../../utils";
+// @ts-ignore
+import InputGroup from "bootstrap-vue/es/components/input-group";
+// @ts-ignore
+import FormInput from "bootstrap-vue/es/components/form-input";
+// @ts-ignore
+import Button from "bootstrap-vue/es/components/button";
+Vue.use(InputGroup);
+Vue.use(FormInput);
+Vue.use(Button);
+const baseURL = "/detect/";
 
-    const baseURL = "/detect/";
-
-    export default Vue.extend({
-        name: "Main",
-        props: {
-            ua: String
-        },
-        components: {
-            Icon
-        },
-        data() {
-            return {
-                userAgent: this.ua ? this.ua : navigator.userAgent,
-                dd: {} as ParsedData,
-                gotData: false,
-                processingServerSide: false,
-                showJSON: false
-            };
-        },
-        computed: {
-            prettyJSON(): string {
-                return syntaxHighlight(JSON.stringify(this.dd, null, 2));
-            }
-        },
-        methods: {
-            submit(): void {
-                this.$router.replace({name: "main", params: {"ua": this.userAgent}});
-            },
-            fetchData(ua: string): void {
-                this.gotData = false;
-                this.processingServerSide = true;
-                const req = new XMLHttpRequest();
-                req.onreadystatechange = (event: Event): void => {
-                    if (req.readyState === XMLHttpRequest.DONE) {
-                        if (req.status === 200) {
-                            this.dd = JSON.parse(req.responseText);
-                            this.gotData = true;
-                            this.processingServerSide = false;
-                        }
-                    }
-                };
-                req.open("GET", baseURL + "?ua=" + ua, true);
-                req.send(null);
-            }
-        },
-        watch: {
-            ua(val: string): void {
-                if (!val) {
-                    this.submit();
-                } else {
-                    this.fetchData(val);
-                }
-            },
-            showJSON(newValue: boolean): void {
-                localStorage.showJSON = newValue;
-            }
-        },
-        mounted(): void {
-            if (this.ua) {
-                this.fetchData(this.ua);
-            } else {
-                this.submit();
-            }
-            if (localStorage.showJSON) {
-                this.showJSON = !!localStorage.showJSON;
-            }
+export default Vue.extend({
+    name: "Main",
+    props: {
+        ua: String
+    },
+    components: {
+        Icon
+    },
+    data() {
+        return {
+            userAgent: this.ua ? this.ua : navigator.userAgent,
+            dd: {} as ParsedData,
+            gotData: false,
+            processingServerSide: false,
+            showJSON: false
+        };
+    },
+    computed: {
+        prettyJSON(): string {
+            return syntaxHighlight(JSON.stringify(this.dd, null, 2));
         }
-    });
+    },
+    methods: {
+        submit(): void {
+            this.$router.replace({name: "main", params: {ua: this.userAgent}});
+        },
+        fetchData(ua: string): void {
+            this.gotData = false;
+            this.processingServerSide = true;
+            const req = new XMLHttpRequest();
+            req.onreadystatechange = (event: Event): void => {
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        this.dd = JSON.parse(req.responseText);
+                        this.gotData = true;
+                        this.processingServerSide = false;
+                    }
+                }
+            };
+            req.open("GET", baseURL + "?ua=" + ua, true);
+            req.send(null);
+        }
+    },
+    watch: {
+        ua(val: string): void {
+            if (!val) {
+                this.submit();
+            } else {
+                this.fetchData(val);
+            }
+        },
+        showJSON(newValue: boolean): void {
+            localStorage.showJSON = newValue;
+        }
+    },
+    mounted(): void {
+        if (this.ua) {
+            this.fetchData(this.ua);
+        } else {
+            this.submit();
+        }
+        if (localStorage.showJSON) {
+            this.showJSON = !!localStorage.showJSON;
+        }
+    }
+});
 </script>
 
 

@@ -26,9 +26,9 @@
                     </b-collapse>
                 </b-navbar>
             </div>
-            <b-container>
+            <div class="container">
                 <router-view :lastUpdated="lastUpdated"/>
-            </b-container>
+            </div>
         </div>
         <footer>
             <div>

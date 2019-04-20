@@ -3,12 +3,15 @@
          role="presentation" :alt="title" class="icon" width="48" height="48">
 </template>
 <script lang="ts">
-    import Vue from "vue";
+import Vue from "vue";
+// @ts-ignore
+import Navbar from "bootstrap-vue/es/components/navbar";
+Vue.use(Navbar);
 
-    export default Vue.extend({
-        props: ["icon", "title"],
-        name: "Icon"
-    });
+export default Vue.extend({
+    props: ["icon", "title"],
+    name: "Icon"
+});
 </script>
 
 <style lang="scss">
