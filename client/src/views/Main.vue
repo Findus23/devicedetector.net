@@ -14,23 +14,25 @@
                 Device Detecter couldn't detect any information about this user agent.
             </div>
             <div v-else-if="dd.isBot" class="box centered">
-                <div><a :href="dd.botInfo.url">{{dd.botInfo.name}}</a></div>
+                <div><a :href="dd.botInfo.url" target="_blank" rel="noopener">{{dd.botInfo.name}}</a></div>
                 <div>{{dd.botInfo.category}}</div>
-                <div><a :href="dd.botInfo.producer.url">{{dd.botInfo.producer.name}}</a></div>
+                <div><a :href="dd.botInfo.producer.url" target="_blank" rel="noopener">{{dd.botInfo.producer.name}}</a>
+                </div>
             </div>
             <div v-else>
                 <div class="box-row">
-                    <div class="box centered">
-                        <div v-if="dd.osInfo">
-                            <icon :title="dd.osInfo.short_name" :icon="dd.icons.os"></icon>
-                            <div>{{dd.osInfo.name}} {{dd.osInfo.version}}</div>
-                            <div>{{dd.osInfo.platform}}</div>
-                        </div>
+                    <div class="box centered" v-if="dd.osInfo && (Object.keys(dd.osInfo).length !== 0)">
+                        <icon :title="dd.osInfo.short_name" :icon="dd.icons.os"></icon>
+                        <div>{{dd.osInfo.name}} {{dd.osInfo.version}}</div>
+                        <div>{{dd.osInfo.platform}}</div>
                     </div>
                     <div class="box last centered">
                         <icon :title="dd.clientInfo.short_name" :icon="dd.icons.browser"></icon>
                         <div>{{dd.clientInfo.name}} {{dd.clientInfo.version}}</div>
                         <div v-if="dd.clientInfo.engine">{{dd.clientInfo.engine}} {{dd.clientInfo.engine_version}}</div>
+                        <div v-if="dd.clientInfo.type!=='browser'">
+                            {{dd.clientInfo.type}}
+                        </div>
                     </div>
                 </div>
                 <div class="box-row">
@@ -40,7 +42,7 @@
                             {{dd.deviceBrand}}
                         </div>
                     </div>
-                    <div :class="{box:true, centered:true, last:dd.deviceBrand}">
+                    <div v-if="dd.deviceName" :class="{box:true, centered:true, last:dd.deviceBrand}">
                         <icon :title="dd.deviceName" :icon="dd.icons.device"></icon>
                         <div>{{dd.deviceName}}</div>
                     </div>
@@ -63,13 +65,14 @@
 import Vue from "vue";
 import {ParsedData} from "@/interfaces";
 import Icon from "../components/Icon.vue";
-import {syntaxHighlight} from "../../utils";
+import {syntaxHighlight} from "@/utils";
 // @ts-ignore
 import InputGroup from "bootstrap-vue/es/components/input-group";
 // @ts-ignore
 import FormInput from "bootstrap-vue/es/components/form-input";
 // @ts-ignore
 import Button from "bootstrap-vue/es/components/button";
+
 Vue.use(InputGroup);
 Vue.use(FormInput);
 Vue.use(Button);
