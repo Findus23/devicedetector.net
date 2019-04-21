@@ -15,14 +15,6 @@ use Spyc;
 
 require_once '../vendor/autoload.php';
 
-$config = parse_ini_file("../config.ini");
-
-
-if ($config["debug"]) {
-    header('Access-Control-Allow-Origin: *');
-}
-
-
 $cacheloader = new CacheLoader();
 
 

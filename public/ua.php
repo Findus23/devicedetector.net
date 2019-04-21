@@ -6,13 +6,6 @@ require_once '../vendor/autoload.php';
 
 use DeviceDetector\DeviceDetector;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
-$config = parse_ini_file("../config.ini");
-
-
-if ($config["debug"]) {
-    header('Access-Control-Allow-Origin: *');
-}
-
 
 // OPTIONAL: Set version truncation to none, so full versions will be returned
 // By default only minor versions will be returned (e.g. X.Y)
