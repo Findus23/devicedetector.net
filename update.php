@@ -6,6 +6,8 @@ require_once 'vendor/autoload.php';
 
 system("composer update piwik/device-detector");
 
+system("cd matomo-icons/ && git pull");
+
 $lockstring = file_get_contents("composer.lock");
 $composerLock = json_decode($lockstring, true);
 
