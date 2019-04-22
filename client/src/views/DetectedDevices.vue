@@ -1,6 +1,6 @@
 <template>
   <div class="about box" v-if="supported.operatingSystems">
-    <h2>What Device Detector is able to detect</h2>
+    <h1>What Device Detector is able to detect</h1>
 
     <em>Last update: {{lastUpdated.toLocaleString()}}</em>
     <h3>List of detected operating systems:</h3>

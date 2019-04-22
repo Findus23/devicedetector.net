@@ -9,8 +9,15 @@
 
                     <b-collapse id="nav-collapse" is-nav>
                         <b-navbar-nav>
-                            <b-nav-item :to="{name:'main'}">Home</b-nav-item>
-                            <b-nav-item :to="{name:'about'}">About</b-nav-item>
+                            <b-nav-item :to="{name:'main'}" :linkClasses="{active:$route.name==='main'}">
+                                Home
+                            </b-nav-item>
+                            <b-nav-item :to="{name:'detectedDevices'}" :linkClasses="{active:$route.name==='detectedDevices'}">
+                                Detected Devices
+                            </b-nav-item>
+                            <b-nav-item :to="{name:'contribute'}" :linkClasses="{active:$route.name==='contribute'}">
+                                Contribute
+                            </b-nav-item>
                         </b-navbar-nav>
 
                         <!-- Right aligned nav items -->
@@ -130,6 +137,15 @@
         justify-content: space-between;
         color: white;
         flex-shrink: 0;
+
+        a {
+            color: white;
+            text-decoration: underline;
+
+            &:hover, &:active, &:focus {
+                color: #bbb;
+            }
+        }
     }
 
     #app {
