@@ -16,7 +16,12 @@
             <div v-else-if="dd.isBot" class="box centered">
                 <div><a :href="dd.botInfo.url" target="_blank" rel="noopener">{{dd.botInfo.name}}</a></div>
                 <div>{{dd.botInfo.category}}</div>
-                <div><a :href="dd.botInfo.producer.url" target="_blank" rel="noopener">{{dd.botInfo.producer.name}}</a>
+                <div v-if="dd.botInfo.producer">
+                    <a v-if="dd.botInfo.producer.url" :href="dd.botInfo.producer.url"
+                       target="_blank" rel="noopener">
+                        {{dd.botInfo.producer.name}}
+                    </a>
+                    <template v-else>{{dd.botInfo.producer.name}}</template>
                 </div>
             </div>
             <div v-else>
