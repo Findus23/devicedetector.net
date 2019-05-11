@@ -13,6 +13,8 @@
 
         <p>You have seen an incorrect/missing/ugly icon? Then please report it <a href="https://github.com/matomo-org/matomo-icons">on the matomo-icons repository</a>.</p>
 
+        <p>You have found a bug in this website? Then please report it <a href="https://github.com/Findus23/devicedetector.net">in the devicedetector.net repository</a>.</p>
+
         <h2>Listing all user agents from your logs</h2>
 
         <p>

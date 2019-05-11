@@ -1,28 +1,33 @@
 <template>
-  <div class="about box" v-if="supported.operatingSystems">
-    <h1>What Device Detector is able to detect</h1>
+  <div>
+    <div v-if="tooManyRequests" class="box centered">
+      There were too many requests. Please wait a minute before reloading the website.
+    </div>
+    <div class="about box" v-if="supported.operatingSystems">
+      <h1>What Device Detector is able to detect</h1>
 
-    <em>Last update: {{lastUpdated.toLocaleString()}}</em>
-    <h3>List of detected operating systems:</h3>
-    <p>{{ supported.operatingSystems.join(", ") }}</p>
-    <h3>List of detected browsers:</h3>
-    <p>{{supported.browsers.join(", ")}}</p>
-    <h3>List of detected browser engines:</h3>
-    <p>{{supported.engines.join(", ")}}</p>
-    <h3>List of detected libraries:</h3>
-    <p>{{supported.libraries.join(", ")}}</p>
-    <h3>List of detected media players:</h3>
-    <p>{{supported.mediaPlayer.join(", ")}}</p>
-    <h3>List of detected mobile apps:</h3>
-    <p>{{supported.mobileApps.join(", ")}}</p>
-    <h3>List of detected PIMs (personal information manager):</h3>
-    <p>{{supported.PIM.join(", ")}}</p>
-    <h3>List of detected feed readers:</h3>
-    <p>{{supported.feedReaders.join(", ")}}</p>
-    <h3>List of brands with detected devices:</h3>
-    <p>{{supported.brands.join(", ")}}</p>
-    <h3>List of detected bots:</h3>
-    <p>{{supported.bots.join(", ")}}</p>
+      <em>Last update: {{lastUpdated.toLocaleString()}}</em>
+      <h3>List of detected operating systems:</h3>
+      <p>{{ supported.operatingSystems.join(", ") }}</p>
+      <h3>List of detected browsers:</h3>
+      <p>{{supported.browsers.join(", ")}}</p>
+      <h3>List of detected browser engines:</h3>
+      <p>{{supported.engines.join(", ")}}</p>
+      <h3>List of detected libraries:</h3>
+      <p>{{supported.libraries.join(", ")}}</p>
+      <h3>List of detected media players:</h3>
+      <p>{{supported.mediaPlayer.join(", ")}}</p>
+      <h3>List of detected mobile apps:</h3>
+      <p>{{supported.mobileApps.join(", ")}}</p>
+      <h3>List of detected PIMs (personal information manager):</h3>
+      <p>{{supported.PIM.join(", ")}}</p>
+      <h3>List of detected feed readers:</h3>
+      <p>{{supported.feedReaders.join(", ")}}</p>
+      <h3>List of brands with detected devices:</h3>
+      <p>{{supported.brands.join(", ")}}</p>
+      <h3>List of detected bots:</h3>
+      <p>{{supported.bots.join(", ")}}</p>
+    </div>
   </div>
 </template>
 
@@ -37,7 +42,8 @@ export default Vue.extend({
   props: ["lastUpdated"],
   data() {
     return {
-      supported: {} as SupportedList
+      supported: {} as SupportedList,
+      tooManyRequests: false
     };
   },
   mounted(): void {
@@ -46,6 +52,8 @@ export default Vue.extend({
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           this.supported = JSON.parse(req.responseText);
+        } else if (req.status === 429) {
+          this.tooManyRequests = true;
         }
       }
     };
