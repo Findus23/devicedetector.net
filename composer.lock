@@ -137,12 +137,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/matomo-org/device-detector.git",
-                "reference": "92fa41434af96b762e6c25a8d2287fa2a79567d5"
+                "reference": "bb6ea27138a8a97b9fa63f80e4f2fb441cd1a67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/92fa41434af96b762e6c25a8d2287fa2a79567d5",
-                "reference": "92fa41434af96b762e6c25a8d2287fa2a79567d5",
+                "url": "https://api.github.com/repos/matomo-org/device-detector/zipball/bb6ea27138a8a97b9fa63f80e4f2fb441cd1a67f",
+                "reference": "bb6ea27138a8a97b9fa63f80e4f2fb441cd1a67f",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
                 "parser",
                 "useragent"
             ],
-            "time": "2019-05-24T19:45:35+00:00"
+            "time": "2019-06-07T20:11:40+00:00"
         },
         {
             "name": "psr/cache",
@@ -281,16 +281,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "f09463d1165396745fef0aae64b7a784c891be9f"
+                "reference": "2edc417da273bafee589a8758f0278416d04af38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/f09463d1165396745fef0aae64b7a784c891be9f",
-                "reference": "f09463d1165396745fef0aae64b7a784c891be9f",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/2edc417da273bafee589a8758f0278416d04af38",
+                "reference": "2edc417da273bafee589a8758f0278416d04af38",
                 "shasum": ""
             },
             "require": {
@@ -355,7 +355,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-05-27T08:16:38+00:00"
+            "time": "2019-06-06T10:05:02+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -475,7 +475,7 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
