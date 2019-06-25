@@ -32,7 +32,7 @@ if ($item->isHit()) {
     }
 
     function get_values(array $dict) {
-        natsort($dict);
+        natcasesort($dict);
         $values = array_values($dict);
         return $values;
     }
