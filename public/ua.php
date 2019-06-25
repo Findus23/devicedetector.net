@@ -5,7 +5,9 @@ namespace DeviceDetectorNet;
 require_once '../vendor/autoload.php';
 
 use DeviceDetector\DeviceDetector;
+use DeviceDetector\Parser\Client\Browser;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
+use DeviceDetector\Parser\OperatingSystem;
 
 // OPTIONAL: Set version truncation to none, so full versions will be returned
 // By default only minor versions will be returned (e.g. X.Y)
@@ -32,7 +34,9 @@ if ($dd->isBot()) {
     $data["botInfo"] = $dd->getBot();
 } else {
     $data["clientInfo"] = $dd->getClient();
+    $data["browserFamily"]= Browser::getBrowserFamily($dd->getClient('short_name'));
     $data["osInfo"] = $dd->getOs();
+    $data["osFamily"]=OperatingSystem::getOsFamily($dd->getOs('short_name'));
     $data["device"] = $dd->getDevice();
     $data["deviceName"] = $dd->getDeviceName();
     $data["deviceBrand"] = $dd->getBrandName();
@@ -44,7 +48,6 @@ if ($dd->isBot()) {
         "brand" => $icons->getBrandLogo()
     ];
 }
-
 header("Content-Type: application/json; charset=UTF-8");
 echo json_encode($data,JSON_FORCE_OBJECT);
 
