@@ -35,6 +35,7 @@ if ($dd->isBot()) {
 } else {
     $data["clientInfo"] = $dd->getClient();
     $data["browserFamily"]= Browser::getBrowserFamily($dd->getClient('short_name'));
+    $data["isMobileOnlyBrowser"] = Browser::isMobileOnlyBrowser($dd->getClient('short_name'));
     $data["osInfo"] = $dd->getOs();
     $data["osFamily"]=OperatingSystem::getOsFamily($dd->getOs('short_name'));
     $data["device"] = $dd->getDevice();

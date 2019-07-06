@@ -41,13 +41,14 @@
                         <div v-if="dd.clientInfo.type!=='browser'">
                             {{dd.clientInfo.type}}
                         </div>
+                        <img v-if="dd.isMobileOnlyBrowser" src="/icons/devices/smartphone.png" class="mobileonly" title="Mobile only browser">
                     </div>
                 </div>
                 <div class="box-row">
                     <div class="box centered" v-if="dd.deviceBrand">
                         <icon :title="dd.deviceBrand" :icon="dd.icons.brand"></icon>
                         <div>
-                            {{dd.deviceBrand}}
+                            {{dd.deviceBrand}} {{dd.model}}
                         </div>
                     </div>
                     <div v-if="dd.deviceName" :class="{box:true, centered:true, last:dd.deviceBrand}">
@@ -185,5 +186,11 @@ export default Vue.extend({
         .key {
             color: black;
         }
+    }
+    .mobileonly {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 20px;
     }
 </style>

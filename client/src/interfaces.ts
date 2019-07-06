@@ -8,12 +8,15 @@ export interface ParsedData {
         "engine": string,
         "engine_version": string
     };
+    "browserFamily": string;
+    "isMobileOnlyBrowser": boolean;
     "osInfo": {
         "name": string,
         "short_name": string,
         "version": string,
         "platform": string
     };
+    "osFamily": string;
     "device": number;
     "deviceName": string;
     "deviceBrand": string;
