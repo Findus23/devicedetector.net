@@ -18,6 +18,9 @@
                             <b-nav-item :to="{name:'contribute'}" :linkClasses="{active:$route.name==='contribute'}">
                                 Contribute
                             </b-nav-item>
+                            <a href="https://github.com/matomo-org/device-detector#usage" class="nav-link" target="_blank" rel="noopener">
+                              Usage
+                            </a>
                         </b-navbar-nav>
 
                         <!-- Right aligned nav items -->
