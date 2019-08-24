@@ -8,6 +8,7 @@ use DeviceDetector\DeviceDetector;
 use DeviceDetector\Parser\Client\Browser;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
 use DeviceDetector\Parser\OperatingSystem;
+use DeviceDetector\Yaml\Symfony;
 
 // OPTIONAL: Set version truncation to none, so full versions will be returned
 // By default only minor versions will be returned (e.g. X.Y)
@@ -24,6 +25,7 @@ if (!empty($_GET["ua"])) {
 
 
 $dd = new DeviceDetector($userAgent);
+$dd->setYamlParser(new Symfony());
 
 $cacheloader->configureDeviceDetector($dd);
 $dd->parse();
