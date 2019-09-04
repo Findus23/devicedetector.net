@@ -23,6 +23,11 @@ if (!empty($_GET["ua"])) {
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
 }
 
+if (strlen($userAgent) > 1000) {
+    echo "The user agent has to be shorter than 1000 characters.";
+    http_response_code(500);
+    exit();
+}
 
 $dd = new DeviceDetector($userAgent);
 $dd->setYamlParser(new Symfony());

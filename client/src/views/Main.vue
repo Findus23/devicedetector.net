@@ -12,6 +12,9 @@
         <div v-if="tooManyRequests" class="box centered">
             There were too many requests. Please wait a minute before reloading the website.
         </div>
+      <div v-if="serverError" class="box centered">
+        There was an error on the server: <code>{{serverError}}</code>
+      </div>
         <div v-if="gotData">
             <div v-if="!dd.clientInfo && !dd.botInfo" class="box centered">
                 Device Detecter couldn't detect any information about this user agent.
@@ -102,7 +105,8 @@ export default Vue.extend({
             gotData: false,
             processingServerSide: false,
             showJSON: false,
-            tooManyRequests: false
+            tooManyRequests: false,
+            serverError: ""
         };
     },
     computed: {
@@ -116,6 +120,7 @@ export default Vue.extend({
         },
         fetchData(ua: string): void {
             this.gotData = false;
+            this.serverError = "";
             this.tooManyRequests = false;
             this.processingServerSide = true;
             const req = new XMLHttpRequest();
@@ -124,11 +129,13 @@ export default Vue.extend({
                     if (req.status === 200) {
                         this.dd = JSON.parse(req.responseText);
                         this.gotData = true;
-                        this.processingServerSide = false;
                     } else if (req.status === 429) {
                         this.tooManyRequests = true;
-                        this.processingServerSide = false;
+                    } else {
+                        this.serverError = req.responseText;
                     }
+                    this.processingServerSide = false;
+
                 }
             };
             req.open("GET", baseURL + "?ua=" + ua, true);
