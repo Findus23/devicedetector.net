@@ -46,7 +46,7 @@
                                          target="_blank">{{shortHash}}</a>
             </div>
             <div>
-                test
+                &copy; Matomo team & Stefan Giehl
             </div>
             <div>
                 last updated on {{lastUpdated.toLocaleString()}}
@@ -150,6 +150,14 @@
 
             &:hover, &:active, &:focus {
                 color: #bbb;
+            }
+        }
+
+        @include media-breakpoint-down(sm) {
+            flex-wrap: wrap;
+            div {
+                flex-basis: 100%;
+                text-align: center;
             }
         }
     }

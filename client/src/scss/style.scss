@@ -31,6 +31,12 @@ h1 {
   .box {
     margin: 9px;
   }
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+    .box {
+      flex-basis: 100%;
+    }
+  }
 }
 
 .box {
@@ -54,7 +60,12 @@ h1 {
     text-align: center;
   }
 }
-
+#detailsBox {
+  margin: 9px 0;
+  button {
+    margin-bottom: 9px;
+  }
+}
 .input-group {
   margin-bottom: 9px;
 }
