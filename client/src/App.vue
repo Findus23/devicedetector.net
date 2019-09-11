@@ -46,6 +46,9 @@
                                          target="_blank">{{shortHash}}</a>
             </div>
             <div>
+                test
+            </div>
+            <div>
                 last updated on {{lastUpdated.toLocaleString()}}
             </div>
         </footer>
@@ -56,8 +59,8 @@
     import Vue from "vue";
     import {Version} from "@/interfaces";
     // @ts-ignore
-    import Navbar from "bootstrap-vue/es/components/navbar";
-    Vue.use(Navbar);
+    import {NavbarPlugin} from "bootstrap-vue";
+    Vue.use(NavbarPlugin);
 
     const versionJSON = "/version.json";
 

@@ -78,16 +78,11 @@ import Vue from "vue";
 import {ParsedData} from "@/interfaces";
 import Icon from "../components/Icon.vue";
 import {syntaxHighlight} from "@/utils";
-// @ts-ignore
-import InputGroup from "bootstrap-vue/es/components/input-group";
-// @ts-ignore
-import FormInput from "bootstrap-vue/es/components/form-input";
-// @ts-ignore
-import Button from "bootstrap-vue/es/components/button";
+import {InputGroupPlugin, FormInputPlugin, ButtonPlugin} from "bootstrap-vue";
 
-Vue.use(InputGroup);
-Vue.use(FormInput);
-Vue.use(Button);
+Vue.use(InputGroupPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(ButtonPlugin);
 const baseURL = "/detect/";
 
 export default Vue.extend({
