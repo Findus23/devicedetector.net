@@ -11,7 +11,6 @@ use DeviceDetector\Parser\Client\MobileApp;
 use DeviceDetector\Parser\Client\PIM;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
 use DeviceDetector\Parser\OperatingSystem;
-use Spyc;
 use Symfony\Component\Yaml\Yaml;
 
 require_once '../vendor/autoload.php';
@@ -26,7 +25,7 @@ if ($item->isHit()) {
 } else {
 
     $bots = [];
-    $parsedBots = Yaml::parse(__DIR__ . '/../vendor/piwik/device-detector/regexes/bots.yml');
+    $parsedBots = Yaml::parse(file_get_contents(__DIR__ . '/../vendor/piwik/device-detector/regexes/bots.yml'));
     foreach ($parsedBots as $parsedBot) {
         $bots[] = $parsedBot['name'];
     }
