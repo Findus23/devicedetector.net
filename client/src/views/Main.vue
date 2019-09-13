@@ -158,6 +158,7 @@ export default Vue.extend({
         if (localStorage.showJSON) {
             this.showJSON = !!localStorage.showJSON;
         }
+        document.title = "Device Detector Demo";
     }
 });
 </script>

@@ -47,6 +47,7 @@ export default Vue.extend({
     };
   },
   mounted(): void {
+    document.title = "Detected Devices | Device Detector";
     const req = new XMLHttpRequest();
     req.onreadystatechange = (event: Event): void => {
       if (req.readyState === XMLHttpRequest.DONE) {

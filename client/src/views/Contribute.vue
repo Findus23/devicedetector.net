@@ -43,7 +43,10 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    name: "contribute"
+    name: "contribute",
+    mounted(): void {
+        document.title = "Contribute | Device Detector";
+    }
 });
 </script>
 
