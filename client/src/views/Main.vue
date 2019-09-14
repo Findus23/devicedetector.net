@@ -67,7 +67,7 @@
                 Show Device Detector response
             </b-button>
             <b-collapse id="collapse-1" class="mt-2 box" v-model="showJSON">
-                <pre><code style="text-align: left" v-html="prettyJSON"></code></pre>
+                <pre class="json"><code style="text-align: left" v-html="prettyJSON"></code></pre>
             </b-collapse>
         </div>
     </div>

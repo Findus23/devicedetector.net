@@ -21,6 +21,9 @@
                             <a href="https://github.com/matomo-org/device-detector#usage" class="nav-link" target="_blank" rel="noopener">
                               Usage
                             </a>
+                            <b-nav-item :to="{name:'ports'}" :linkClasses="{active:$route.name==='ports'}">
+                                Ports
+                            </b-nav-item>
                         </b-navbar-nav>
 
                         <!-- Right aligned nav items -->

@@ -51,30 +51,6 @@ export default Vue.extend({
 </script>
 
 
-<style lang="scss" scoped>
-    pre {
-        background: #31363b;
-        color: #eff0f1;
-        padding: 10px;
-
-        code {
-            &::before {
-                content: "➜ ";
-                color: #1cdc9a;
-            }
-
-            .keyword {
-                color: #1cdc9a;
-            }
-
-            .path {
-                color: #3daee9;
-            }
-
-            .string {
-                color: #f67400;
-            }
-        }
-    }
+<style lang="scss">
 
 </style>
