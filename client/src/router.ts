@@ -22,7 +22,7 @@ export default new Router({
         {
             path: "/ports",
             name: "ports",
-            component: () => import(/* webpackChunkName: "about" */ "./views/Ports.vue")
+            component: () => import(/* webpackChunkName: "ports" */ "./views/Ports.vue")
         },
         {
             path: "/:ua?",
