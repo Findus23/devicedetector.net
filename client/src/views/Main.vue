@@ -61,12 +61,15 @@
                 </div>
             </div>
         </div>
-        <div v-if="gotData" id="detailsBox">
-            <b-button variant="primary" :aria-expanded="showJSON"
-                      @click="showJSON=!showJSON">
-                Show Device Detector response
-            </b-button>
-            <b-collapse id="collapse-1" class="mt-2 box" v-model="showJSON">
+        <div v-if="gotData" id="detailsBox" class="mt-2 box">
+            <div :class="{collapseButton:true,open:showJSON}" :aria-expanded="showJSON"
+                 @click="showJSON=!showJSON" tabindex="0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                    <path d="M6.7 15.7l5.3-5.3 5.3 5.3 1.4-1.4L12 7.6l-6.7 6.7z"/>
+                </svg>
+                <h3>raw data</h3>
+            </div>
+            <b-collapse id="collapse-1" class="collapseContent" v-model="showJSON">
                 <pre class="json"><code style="text-align: left" v-html="prettyJSON"></code></pre>
             </b-collapse>
         </div>
@@ -195,5 +198,39 @@ export default Vue.extend({
         right: 10px;
         top: 10px;
         width: 20px;
+    }
+
+    #detailsBox {
+        padding: 0;
+
+        .collapseButton {
+            padding: 20px;
+            cursor: pointer;
+            svg {
+                position: absolute;
+                transform: rotate(90deg);
+                transition: transform .3s;
+            }
+
+            &:hover, &:focus, &.open {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        h3 {
+            text-align: center;
+            margin: 0;
+            font-weight: 400;
+        }
+
+    }
+
+    .collapseContent {
+        border-top: 1px solid #ddd;
+        pre {
+            padding: 20px;
+        }
     }
 </style>
