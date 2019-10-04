@@ -143,6 +143,7 @@ export default Vue.extend({
     watch: {
         ua(val: string): void {
             if (!val) {
+                this.userAgent = navigator.userAgent;
                 this.submit();
             } else {
                 this.fetchData(val);
