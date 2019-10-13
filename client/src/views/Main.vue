@@ -3,8 +3,12 @@
         <h1>Device Detector Demo</h1>
         <form @submit.prevent="submit">
             <b-input-group class="mt-3">
-                <b-form-input type="text" v-model="userAgent" :disabled="processingServerSide"></b-form-input>
+                <b-form-input type="text" ref="input" v-model="userAgent"
+                              :disabled="processingServerSide"></b-form-input>
                 <b-input-group-append>
+                    <button class="btn clearButton" @click="clear" type="button">
+                        &times;
+                    </button>
                     <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
                 </b-input-group-append>
             </b-input-group>
@@ -116,6 +120,11 @@ export default Vue.extend({
         submit(): void {
             this.$router.replace({name: "main", params: {ua: this.userAgent}});
         },
+        clear(): void {
+            this.userAgent = "";
+            const input = this.$refs.input as HTMLInputElement;
+            input.focus();
+        },
         fetchData(ua: string): void {
             this.gotData = false;
             this.serverError = "";
@@ -194,6 +203,13 @@ export default Vue.extend({
             color: black;
         }
     }
+
+    .clearButton {
+        font-weight: bold;
+        margin-left: -35px;
+        z-index: 100 !important;
+    }
+
     .mobileonly {
         position: absolute;
         right: 10px;
