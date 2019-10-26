@@ -90,12 +90,16 @@ pre:not(.json) {
       color: #1cdc9a;
     }
 
-    .path {
+    .path, .command {
       color: #3daee9;
     }
 
     .string {
       color: #f67400;
+    }
+
+    .comment {
+      color: #7f8c8d;
     }
   }
 }

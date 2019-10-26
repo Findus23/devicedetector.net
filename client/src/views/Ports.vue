@@ -13,7 +13,7 @@
                 <h2>Ruby</h2>
                 <a href="https://github.com/podigee/device_detector" class="source">Source</a>
 
-                <p>Add this line to your application's Gemfile:</p>
+                <p>Add this line to your application's <code>Gemfile</code>:</p>
 
                 <pre><code class="line"><span class="keyword">gem</span> <span class="string">'device_detector'</span></code></pre>
 
@@ -23,29 +23,48 @@
 
                 <p>Or install it yourself as:</p>
 
-                <pre><code>gem install device_detector</code></pre>
+                <pre><code><span class="keyword">gem</span> install device_detector</code></pre>
             </div>
             <div class="box">
                 <h2>TypeScript/Javascript</h2>
                 <a class="source" href="https://github.com/etienne-martin/device-detector-js">Source</a>
-                <pre><code>npm install device-detector-js</code></pre>
+                <pre><code><span class="keyword">npm</span> install device-detector-js</code></pre>
             </div>
             <div class="box">
                 <h2>Python 3</h2>
                 <a href="https://github.com/thinkwelltwd/device_detector" class="source">Source</a>
 
-                <pre><code>pip install device_detector</code></pre>
+                <pre><code><span class="keyword">pip</span> install device_detector</code></pre>
             </div>
             <div class="box">
                 <h2>Crystal</h2>
                 <a href="https://github.com/creadone/device_detector" class="source">Source</a>
 
-                <p>Add this to your application's shard.yml:</p>
+                <p>Add this to your application's <code>shard.yml</code>:</p>
                 <pre><code class="line"><span class="keyword">dependencies</span>:
         <span class="keyword">device_detector</span>:
             <span class="keyword">github</span>: creadone/device_detector</code></pre>
                 <p>Then run</p>
-                <pre><code>shards install</code></pre>
+                <pre><code><span class="keyword">shards</span> install</code></pre>
+            </div>
+            <div class="box">
+                <h2>Elixir</h2>
+                <a href="https://github.com/elixir-inspector/ua_inspector" class="source">Source</a>
+
+                <p>Add the required dependencies to your <code>mix.exs</code>:</p>
+                <pre><code class="line"><span class="keyword">defp</span> <span class="command">deps</span> <span class="keyword">do</span>
+  [
+    <span class="comment"># ...</span>
+    {<span class="command">:ua_inspector</span>, <span class="string">"~> 1.0"</span>},
+    <span class="comment"># ...</span>
+  ]
+<span class="keyword">end</span></code></pre>
+            </div>
+            <div class="box">
+                <h2>Go</h2>
+                <a href="https://github.com/gamebtc/devicedetector" class="source">Source</a>
+                <p></p>
+                <pre><code><span class="keyword">go</span> get github.com/gamebtc/devicedetector</code></pre>
             </div>
         </div>
     </div>
