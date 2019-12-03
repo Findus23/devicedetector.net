@@ -63,7 +63,6 @@
             <div class="box">
                 <h2>Go</h2>
                 <a href="https://github.com/gamebtc/devicedetector" class="source">Source</a>
-                <p></p>
                 <pre><code><span class="keyword">go</span> get github.com/gamebtc/devicedetector</code></pre>
             </div>
         </div>
