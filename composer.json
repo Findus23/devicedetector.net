@@ -2,11 +2,11 @@
   "require": {
     "piwik/device-detector": "dev-master",
     "doctrine/cache": "^1.8",
-    "symfony/cache": "^4.2",
+    "symfony/cache": "^5.0",
     "ext-json": "*",
     "ext-redis": "*",
     "ext-curl": "*",
-    "symfony/yaml": "^4.3"
+    "symfony/yaml": "^5.0"
   },
   "autoload": {
     "psr-4": {
