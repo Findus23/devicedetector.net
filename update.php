@@ -4,9 +4,17 @@ namespace DeviceDetectorNet;
 
 require_once 'vendor/autoload.php';
 
-system("composer update piwik/device-detector");
+system("composer update piwik/device-detector", $returnCode);
 
-system("cd matomo-icons/ && git pull");
+if ($returnCode) {
+    die();
+}
+
+system("cd matomo-icons/ && git pull", $returncode);
+
+if ($returnCode) {
+    die();
+}
 
 $lockstring = file_get_contents("composer.lock");
 $composerLock = json_decode($lockstring, true);
