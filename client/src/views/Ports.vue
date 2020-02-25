@@ -65,6 +65,16 @@
                 <a href="https://github.com/gamebtc/devicedetector" class="source">Source</a>
                 <pre><code><span class="keyword">go</span> get github.com/gamebtc/devicedetector</code></pre>
             </div>
+            <div class="box">
+                <h2>Java</h2>
+                <a href="https://github.com/mngsk/device-detector" class="source">Source</a>
+                <p>Add the following dependency in your project's pom.xml:</p>
+                <pre><code class="line">&lt;<span class="keyword">dependency</span>&gt;
+	&lt;<span class="keyword">groupId</span>&gt;io.github.mngsk&lt;/<span class="keyword">groupId</span>&gt;
+	&lt;<span class="keyword">artifactId</span>&gt;device-detector&lt;/<span class="keyword">artifactId</span>&gt;
+	&lt;<span class="keyword">version</span>&gt;0.1.0&lt;/<span class="keyword">version</span>&gt;
+&lt;/<span class="keyword">dependency</span>&gt;</code></pre>
+            </div>
         </div>
     </div>
 </template>
