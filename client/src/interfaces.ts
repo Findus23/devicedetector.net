@@ -19,7 +19,10 @@ export interface ParsedData {
     "osFamily": string;
     "device": number;
     "deviceName": string;
-    "deviceBrand": string;
+    "deviceBrand": {
+        "name": string,
+        "short_name": string
+    };
     "model": string;
     "icons": {
         "browser": string | null,

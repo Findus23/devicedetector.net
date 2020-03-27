@@ -41,13 +41,16 @@ if ($dd->isBot()) {
     $data["botInfo"] = $dd->getBot();
 } else {
     $data["clientInfo"] = $dd->getClient();
-    $data["browserFamily"]= Browser::getBrowserFamily($dd->getClient('short_name'));
+    $data["browserFamily"] = Browser::getBrowserFamily($dd->getClient('short_name'));
     $data["isMobileOnlyBrowser"] = Browser::isMobileOnlyBrowser($dd->getClient('short_name'));
     $data["osInfo"] = $dd->getOs();
-    $data["osFamily"]=OperatingSystem::getOsFamily($dd->getOs('short_name'));
+    $data["osFamily"] = OperatingSystem::getOsFamily($dd->getOs('short_name'));
     $data["device"] = $dd->getDevice();
     $data["deviceName"] = $dd->getDeviceName();
-    $data["deviceBrand"] = $dd->getBrandName();
+    $data["deviceBrand"] = [
+        "name" => $dd->getBrandName(),
+        "short_name" => $dd->getBrand()
+    ];
     $data["model"] = $dd->getModel();
     $data["icons"] = [
         "browser" => $icons->getBrowserLogo(),
@@ -57,5 +60,5 @@ if ($dd->isBot()) {
     ];
 }
 header("Content-Type: application/json; charset=UTF-8");
-echo json_encode($data,JSON_FORCE_OBJECT);
+echo json_encode($data, JSON_FORCE_OBJECT);
 

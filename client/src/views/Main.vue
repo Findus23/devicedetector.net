@@ -16,9 +16,9 @@
         <div v-if="tooManyRequests" class="box centered">
             There were too many requests. Please wait a minute before reloading the website.
         </div>
-      <div v-if="serverError" class="box centered">
-        There was an error on the server: <code>{{serverError}}</code>
-      </div>
+        <div v-if="serverError" class="box centered">
+            There was an error on the server: <code>{{serverError}}</code>
+        </div>
         <div v-if="gotData">
             <div v-if="!dd.clientInfo && !dd.botInfo" class="box centered">
                 Device Detecter couldn't detect any information about this user agent.
@@ -48,15 +48,17 @@
                         <div v-if="dd.clientInfo.type!=='browser'">
                             {{dd.clientInfo.type}}
                         </div>
-                        <img v-if="dd.isMobileOnlyBrowser" src="/icons/devices/smartphone.png" class="mobileonly" title="Mobile only browser">
+                        <img v-if="dd.isMobileOnlyBrowser" src="/icons/devices/smartphone.png" class="mobileonly"
+                             title="Mobile only browser">
                     </div>
                 </div>
                 <div class="box-row">
                     <div class="box centered" v-if="dd.deviceBrand">
-                        <icon :title="dd.deviceBrand" :icon="dd.icons.brand"></icon>
+                        <icon :title="dd.deviceBrand.name" :icon="dd.icons.brand"></icon>
                         <div>
-                            {{dd.deviceBrand}} {{dd.model}}
+                            {{dd.deviceBrand.name}} {{dd.model}}
                         </div>
+                        <div v-if="dd.deviceBrand.short_name"><small>{{dd.deviceBrand.short_name}}</small></div>
                     </div>
                     <div v-if="dd.deviceName" :class="{box:true, centered:true, last:dd.deviceBrand}">
                         <icon :title="dd.deviceName" :icon="dd.icons.device"></icon>
@@ -81,99 +83,99 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {ParsedData} from "@/interfaces";
-import Icon from "../components/Icon.vue";
-import {syntaxHighlight} from "@/utils";
-import {InputGroupPlugin, FormInputPlugin, ButtonPlugin} from "bootstrap-vue";
+    import Vue from "vue";
+    import {ParsedData} from "@/interfaces";
+    import Icon from "../components/Icon.vue";
+    import {syntaxHighlight} from "@/utils";
+    import {ButtonPlugin, FormInputPlugin, InputGroupPlugin} from "bootstrap-vue";
 
-Vue.use(InputGroupPlugin);
-Vue.use(FormInputPlugin);
-Vue.use(ButtonPlugin);
-const baseURL = "/detect/";
+    Vue.use(InputGroupPlugin);
+    Vue.use(FormInputPlugin);
+    Vue.use(ButtonPlugin);
+    const baseURL = "/detect/";
 
-export default Vue.extend({
-    name: "Main",
-    props: {
-        ua: String
-    },
-    components: {
-        Icon
-    },
-    data() {
-        return {
-            userAgent: this.ua ? this.ua : navigator.userAgent,
-            dd: {} as ParsedData,
-            gotData: false,
-            processingServerSide: false,
-            showJSON: false,
-            tooManyRequests: false,
-            serverError: ""
-        };
-    },
-    computed: {
-        prettyJSON(): string {
-            return syntaxHighlight(JSON.stringify(this.dd, null, 2));
-        }
-    },
-    methods: {
-        submit(): void {
-            this.$router.replace({name: "main", params: {ua: this.userAgent}});
+    export default Vue.extend({
+        name: "Main",
+        props: {
+            ua: String
         },
-        clear(): void {
-            this.userAgent = "";
-            const input = this.$refs.input as HTMLInputElement;
-            input.focus();
+        components: {
+            Icon
         },
-        fetchData(ua: string): void {
-            this.gotData = false;
-            this.serverError = "";
-            this.tooManyRequests = false;
-            this.processingServerSide = true;
-            const req = new XMLHttpRequest();
-            req.onreadystatechange = (event: Event): void => {
-                if (req.readyState === XMLHttpRequest.DONE) {
-                    if (req.status === 200) {
-                        this.dd = JSON.parse(req.responseText);
-                        this.gotData = true;
-                    } else if (req.status === 429) {
-                        this.tooManyRequests = true;
-                    } else {
-                        this.serverError = req.responseText;
-                    }
-                    this.processingServerSide = false;
-
-                }
+        data() {
+            return {
+                userAgent: this.ua ? this.ua : navigator.userAgent,
+                dd: {} as ParsedData,
+                gotData: false,
+                processingServerSide: false,
+                showJSON: false,
+                tooManyRequests: false,
+                serverError: ""
             };
-            req.open("GET", baseURL + "?ua=" + ua, true);
-            req.send(null);
-        }
-    },
-    watch: {
-        ua(val: string): void {
-            if (!val) {
-                this.userAgent = navigator.userAgent;
-                this.submit();
-            } else {
-                this.fetchData(val);
+        },
+        computed: {
+            prettyJSON(): string {
+                return syntaxHighlight(JSON.stringify(this.dd, null, 2));
             }
         },
-        showJSON(newValue: boolean): void {
-            localStorage.showJSON = newValue;
+        methods: {
+            submit(): void {
+                this.$router.replace({name: "main", params: {ua: this.userAgent}});
+            },
+            clear(): void {
+                this.userAgent = "";
+                const input = this.$refs.input as HTMLInputElement;
+                input.focus();
+            },
+            fetchData(ua: string): void {
+                this.gotData = false;
+                this.serverError = "";
+                this.tooManyRequests = false;
+                this.processingServerSide = true;
+                const req = new XMLHttpRequest();
+                req.onreadystatechange = (event: Event): void => {
+                    if (req.readyState === XMLHttpRequest.DONE) {
+                        if (req.status === 200) {
+                            this.dd = JSON.parse(req.responseText);
+                            this.gotData = true;
+                        } else if (req.status === 429) {
+                            this.tooManyRequests = true;
+                        } else {
+                            this.serverError = req.responseText;
+                        }
+                        this.processingServerSide = false;
+
+                    }
+                };
+                req.open("GET", baseURL + "?ua=" + ua, true);
+                req.send(null);
+            }
+        },
+        watch: {
+            ua(val: string): void {
+                if (!val) {
+                    this.userAgent = navigator.userAgent;
+                    this.submit();
+                } else {
+                    this.fetchData(val);
+                }
+            },
+            showJSON(newValue: boolean): void {
+                localStorage.showJSON = newValue;
+            }
+        },
+        mounted(): void {
+            if (this.ua) {
+                this.fetchData(this.ua);
+            } else {
+                this.submit();
+            }
+            if (localStorage.showJSON) {
+                this.showJSON = !!localStorage.showJSON;
+            }
+            document.title = "Device Detector Demo";
         }
-    },
-    mounted(): void {
-        if (this.ua) {
-            this.fetchData(this.ua);
-        } else {
-            this.submit();
-        }
-        if (localStorage.showJSON) {
-            this.showJSON = !!localStorage.showJSON;
-        }
-        document.title = "Device Detector Demo";
-    }
-});
+    });
 </script>
 
 
@@ -223,6 +225,7 @@ export default Vue.extend({
         .collapseButton {
             padding: 20px;
             cursor: pointer;
+
             svg {
                 position: absolute;
                 transform: rotate(90deg);
@@ -246,6 +249,7 @@ export default Vue.extend({
 
     .collapseContent {
         border-top: 1px solid #ddd;
+
         pre {
             padding: 20px;
         }
