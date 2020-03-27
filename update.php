@@ -4,7 +4,7 @@ namespace DeviceDetectorNet;
 
 require_once 'vendor/autoload.php';
 
-system("composer update piwik/device-detector", $returnCode);
+system("composer update piwik/device-detector -q", $returnCode);
 
 if ($returnCode) {
     die();
