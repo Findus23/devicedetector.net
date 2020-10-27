@@ -9,7 +9,7 @@ use DeviceDetector\Parser\Client\Library;
 use DeviceDetector\Parser\Client\MediaPlayer;
 use DeviceDetector\Parser\Client\MobileApp;
 use DeviceDetector\Parser\Client\PIM;
-use DeviceDetector\Parser\Device\DeviceParserAbstract;
+use DeviceDetector\Parser\Device\AbstractDeviceParser;
 use DeviceDetector\Parser\OperatingSystem;
 use Symfony\Component\Yaml\Yaml;
 
@@ -46,7 +46,7 @@ if ($item->isHit()) {
         "mobileApps" => get_values(MobileApp::getAvailableClients()),
         "PIM" => get_values(PIM::getAvailableClients()),
         "feedReaders" => get_values(FeedReader::getAvailableClients()),
-        "brands" => get_values(DeviceParserAbstract::$deviceBrands),
+        "brands" => get_values(AbstractDeviceParser::$deviceBrands),
         "bots" => get_values($bots)
 
 
