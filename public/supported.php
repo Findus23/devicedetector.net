@@ -15,6 +15,14 @@ use Symfony\Component\Yaml\Yaml;
 
 require_once '../vendor/autoload.php';
 
+function get_values(array $dict): array
+{
+    natcasesort($dict);
+    $values = array_values($dict);
+    return $values;
+}
+
+
 $cacheloader = new CacheLoader();
 
 
@@ -23,17 +31,10 @@ $item = $cacheloader->cache->getItem("supported");
 if ($item->isHit()) {
     $data = $item->get();
 } else {
-
     $bots = [];
     $parsedBots = Yaml::parse(file_get_contents(__DIR__ . '/../vendor/piwik/device-detector/regexes/bots.yml'));
     foreach ($parsedBots as $parsedBot) {
         $bots[] = $parsedBot['name'];
-    }
-
-    function get_values(array $dict) {
-        natcasesort($dict);
-        $values = array_values($dict);
-        return $values;
     }
 
 
@@ -48,16 +49,12 @@ if ($item->isHit()) {
         "feedReaders" => get_values(FeedReader::getAvailableClients()),
         "brands" => get_values(AbstractDeviceParser::$deviceBrands),
         "bots" => get_values($bots)
-
-
     ];
-
 
     $item->set($data);
     $item->expiresAfter(60 * 60 * 24);
     $cacheloader->cache->save($item);
 }
-
 
 header("Content-Type: application/json; charset=UTF-8");
 echo json_encode($data);
