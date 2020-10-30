@@ -9,8 +9,8 @@ use DeviceDetector\Parser\Client\Browser;
 use DeviceDetector\Parser\OperatingSystem;
 
 class IconPath {
-    private $dd;
-    private $iconDir = __DIR__ . "/../public";
+    private DeviceDetector $dd;
+    private string $iconDir = __DIR__ . "/../public";
 
     public function __construct(DeviceDetector $dd) {
         $this->dd = $dd;
