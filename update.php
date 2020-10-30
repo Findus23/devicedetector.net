@@ -4,7 +4,7 @@ namespace DeviceDetectorNet;
 
 require_once 'vendor/autoload.php';
 
-system("composer update piwik/device-detector -q", $returnCode);
+system("composer update matomo/device-detector -q", $returnCode);
 
 if ($returnCode) {
     die();
@@ -19,7 +19,7 @@ if ($returnCode) {
 $lockstring = file_get_contents("composer.lock");
 $composerLock = json_decode($lockstring, true);
 
-$key = array_search("piwik/device-detector", array_column($composerLock["packages"], 'name'));
+$key = array_search("matomo/device-detector", array_column($composerLock["packages"], 'name'));
 $ddPackage = $composerLock["packages"][$key];
 
 $commitHash = $ddPackage["source"]["reference"];
