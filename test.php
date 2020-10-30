@@ -3,7 +3,7 @@
 namespace DeviceDetectorNet;
 
 require_once "./vendor/autoload.php";
-$dir = "vendor/piwik/device-detector/Tests/fixtures/";
+$dir = "vendor/matomo/device-detector/Tests/fixtures/";
 
 $testfiles = scandir($dir);
 

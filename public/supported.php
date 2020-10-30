@@ -32,7 +32,7 @@ if ($item->isHit()) {
     $data = $item->get();
 } else {
     $bots = [];
-    $parsedBots = Yaml::parse(file_get_contents(__DIR__ . '/../vendor/piwik/device-detector/regexes/bots.yml'));
+    $parsedBots = Yaml::parse(file_get_contents(__DIR__ . '/../vendor/matomo/device-detector/regexes/bots.yml'));
     foreach ($parsedBots as $parsedBot) {
         $bots[] = $parsedBot['name'];
     }
