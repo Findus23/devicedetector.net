@@ -20,8 +20,8 @@
             There was an error on the server: <code>{{serverError}}</code>
         </div>
         <div v-if="gotData">
-            <div v-if="!dd.clientInfo && !dd.botInfo" class="box centered">
-                Device Detecter couldn't detect any information about this user agent.
+            <div v-if="!dd.clientInfo && !dd.botInfo && !dd.osInfo" class="box centered">
+                Device Detector couldn't detect any information about this user agent.
             </div>
             <div v-else-if="dd.isBot" class="box centered">
                 <div><a :href="dd.botInfo.url" target="_blank" rel="noopener">{{dd.botInfo.name}}</a></div>
@@ -41,7 +41,7 @@
                         <div>{{dd.osInfo.name}} {{dd.osInfo.version}}</div>
                         <div>{{dd.osInfo.platform}}</div>
                     </div>
-                    <div class="box last centered">
+                    <div class="box last centered" v-if="dd.clientInfo && (Object.keys(dd.clientInfo).length !== 0)">
                         <icon :title="dd.clientInfo.short_name" :icon="dd.icons.browser"></icon>
                         <div>{{dd.clientInfo.name}} {{dd.clientInfo.version}}</div>
                         <div v-if="dd.clientInfo.engine">{{dd.clientInfo.engine}} {{dd.clientInfo.engine_version}}</div>
@@ -104,7 +104,7 @@
         },
         data() {
             return {
-                userAgent: this.ua ? this.ua : navigator.userAgent,
+                userAgent: this.ua ? decodeURIComponent(this.ua) : navigator.userAgent,
                 dd: {} as ParsedData,
                 gotData: false,
                 processingServerSide: false,
