@@ -1,19 +1,36 @@
-# This file is a template, and might need editing before it works on your project.
-# Select image from https://hub.docker.com/_/php/
-image: chialab/php:7.4
+php:
+  image: chialab/php:7.4
 
-# Select what we should cache between builds
-cache:
-  paths:
-  - vendor/
-services:
-  - redis:latest
+  # Select what we should cache between builds
+  cache:
+    paths:
+    - vendor/
+  services:
+    - redis:latest
 
-before_script:
-  - composer install
-  - php -S localhost:9000 -t public >/dev/null 2>/dev/null &
+  before_script:
+    - composer install
+    - php -S localhost:9000 -t public >/dev/null 2>/dev/null &
 
-test:
   script:
   - php update.php
   - php test.php
+
+frontend:
+  tags:
+    - shell
+  cache:
+    paths:
+      - client/node_modules/
+  
+  before_script:
+    - cd client
+    - yarn install --pure-lockfile --ignore-engines
+  
+  script:
+    - yarn run build 
+  artifacts:
+    name: "website"
+    paths:
+      - client/dist/
+    expire_in: 1 week  
