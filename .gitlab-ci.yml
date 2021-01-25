@@ -1,4 +1,6 @@
 php:
+  tags:
+    - docker
   image: chialab/php:7.4
 
   # Select what we should cache between builds
