@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "056b72e0ac1ff1856245656872722fb2",
+    "content-hash": "e326d1867706a7ab15c096d17c74bde9",
     "packages": [
         {
             "name": "matomo/device-detector",
@@ -914,7 +914,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
         "ext-json": "*",
         "ext-redis": "*",
         "ext-curl": "*"
