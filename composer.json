@@ -1,7 +1,7 @@
 {
   "require": {
+    "php": "^7.4",
     "matomo/device-detector": "dev-master",
-    "doctrine/cache": "^1.8",
     "symfony/cache": "^5.0",
     "ext-json": "*",
     "ext-redis": "*",
