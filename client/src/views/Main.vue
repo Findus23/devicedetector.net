@@ -188,7 +188,16 @@ export default Vue.extend({
         },
         mounted(): void {
           if (!this.clientHints) {
-            this.clientHints = JSON.stringify(placeholderClientHints());
+
+            if (typeof navigator.userAgentData!== 'undefined' && (typeof navigator.userAgentData.getHighEntropyValues!== 'undefined')) {
+
+              navigator.userAgentData.getHighEntropyValues(
+                  ['brands', 'model', 'platform', 'platformVersion', 'uaFullVersion', 'fullVersionList']
+              ).then(ua=> {
+                this.clientHints = JSON.stringify(ua);
+
+              });
+            }
           }
           if (this.urlString) {
             const ch = chFromURLString(this.urlString);

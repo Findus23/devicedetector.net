@@ -20,23 +20,6 @@ export function syntaxHighlight(jsonstring: string): string {
     });
 }
 
-export function placeholderClientHints() {
-    return {
-        "brands": [
-            {"brand": "(Not(A:Brand", "version": "8"},
-            {"brand": "Chromium", "version": "98"}
-        ],
-        "fullVersionList": [
-            {"brand": "(Not(A:Brand", "version": "8.0.0.0"},
-            {"brand": "Chromium", "version": "98.0.4758.102"}
-        ],
-        "mobile": false,
-        "model": "",
-        "platform": "Linux",
-        "platformVersion": "5.16.0",
-        "uaFullVersion": "98.0.4758.102"
-    }
-}
 
 export function uaFromURLString(urlString: string): string {
     if (!urlString.includes("||")) {

@@ -70,7 +70,6 @@ if (!empty($_GET["ch"])) {
             $headers = Yaml::parse($trimmed);
         } catch (ParseException  $e) {
             $headers = [];
-            $lines = explode("\n", $_GET["ch"]);
             foreach ($lines as $line) {
                 list($key, $value) = explode(":", $line, 2);
                 $key = trim($key);

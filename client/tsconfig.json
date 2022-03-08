@@ -11,6 +11,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "noImplicitAny": true,
+    "types": [
+      "./node_modules/user-agent-data-types"
+    ],
     "paths": {
       "@/*": [
         "src/*"
