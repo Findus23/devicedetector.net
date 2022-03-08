@@ -6,7 +6,6 @@ Vue.use(Router);
 
 export default new Router({
     mode: "history",
-    base: process.env.BASE_URL,
     // linkActiveClass: "active",
     routes: [
         {
@@ -25,7 +24,7 @@ export default new Router({
             component: () => import(/* webpackChunkName: "ports" */ "./views/Ports.vue")
         },
         {
-            path: "/:ua?",
+            path: "/:urlString?",
             name: "main",
             component: Main,
             props: true

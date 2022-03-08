@@ -19,3 +19,42 @@ export function syntaxHighlight(jsonstring: string): string {
         return "<span class=\"" + cls + "\">" + match + "</span>";
     });
 }
+
+export function placeholderClientHints() {
+    return {
+        "brands": [
+            {"brand": "(Not(A:Brand", "version": "8"},
+            {"brand": "Chromium", "version": "98"}
+        ],
+        "fullVersionList": [
+            {"brand": "(Not(A:Brand", "version": "8.0.0.0"},
+            {"brand": "Chromium", "version": "98.0.4758.102"}
+        ],
+        "mobile": false,
+        "model": "",
+        "platform": "Linux",
+        "platformVersion": "5.16.0",
+        "uaFullVersion": "98.0.4758.102"
+    }
+}
+
+export function uaFromURLString(urlString: string): string {
+    if (!urlString.includes("||")) {
+        return urlString
+    }
+    return urlString.split("||")[0]
+}
+
+export function chFromURLString(urlString: string): string | undefined {
+    if (!urlString.includes("||")) {
+        return undefined
+    }
+    return urlString.split("||")[1]
+}
+
+export function buildURLString(ua: string, ch?: string): string {
+    if (!ch) {
+        return ua
+    }
+    return ua + "||" + ch
+}

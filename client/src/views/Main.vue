@@ -2,16 +2,25 @@
     <div class="main">
         <h1>Device Detector Demo</h1>
         <form @submit.prevent="submit">
-            <b-input-group class="mt-3">
-                <b-form-input type="text" ref="input" v-model="userAgent"
-                              :disabled="processingServerSide"></b-form-input>
-                <b-input-group-append>
-                    <button class="btn clearButton" @click="clear" type="button">
-                        &times;
-                    </button>
-                    <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
-                </b-input-group-append>
-            </b-input-group>
+          <b-input-group class="mt-3">
+            <b-form-input type="text" ref="input" v-model="userAgent"
+                          :disabled="processingServerSide"></b-form-input>
+            <b-input-group-append>
+              <button class="btn clearButton" @click="clear" type="button">
+                &times;
+              </button>
+              <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
+            </b-input-group-append>
+          </b-input-group>
+          <b-form-checkbox
+              id="checkbox-1"
+              v-model="useCh"
+              name="checkbox-1"
+          >
+            Consider Client Hints (JSON or Headers)
+          </b-form-checkbox>
+          <b-form-textarea v-if="useCh" type="text" v-model="clientHints"
+                           :disabled="processingServerSide"></b-form-textarea>
         </form>
         <div v-if="tooManyRequests" class="box centered">
             There were too many requests. Please wait a minute before reloading the website.
@@ -83,76 +92,89 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import {ParsedData} from "@/interfaces";
-    import Icon from "../components/Icon.vue";
-    import {syntaxHighlight} from "@/utils";
-    import {ButtonPlugin, FormInputPlugin, InputGroupPlugin} from "bootstrap-vue";
+import Vue from "vue";
+import {ParsedData} from "@/interfaces";
+import Icon from "../components/Icon.vue";
+import {buildURLString, chFromURLString, placeholderClientHints, syntaxHighlight, uaFromURLString} from "../utils";
+import {FormCheckboxPlugin, ButtonPlugin, FormInputPlugin, FormTextareaPlugin, InputGroupPlugin} from "bootstrap-vue";
 
-    Vue.use(InputGroupPlugin);
-    Vue.use(FormInputPlugin);
-    Vue.use(ButtonPlugin);
-    const baseURL = "/detect/";
+Vue.use(InputGroupPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(ButtonPlugin);
+Vue.use(FormCheckboxPlugin);
+Vue.use(FormTextareaPlugin);
+const baseURL = "/detect/";
 
-    export default Vue.extend({
-        name: "Main",
-        props: {
-            ua: String
-        },
-        components: {
-            Icon
-        },
-        data() {
-            return {
-                userAgent: this.ua ? decodeURIComponent(this.ua) : navigator.userAgent,
-                dd: {} as ParsedData,
-                gotData: false,
-                processingServerSide: false,
-                showJSON: false,
-                tooManyRequests: false,
-                serverError: ""
-            };
-        },
-        computed: {
-            prettyJSON(): string {
-                return syntaxHighlight(JSON.stringify(this.dd, null, 2));
-            }
-        },
-        methods: {
-            submit(): void {
-                this.$router.replace({name: "main", params: {ua: this.userAgent}});
-            },
-            clear(): void {
-                this.userAgent = "";
-                const input = this.$refs.input as HTMLInputElement;
-                input.focus();
-            },
-            fetchData(ua: string): void {
-                this.gotData = false;
-                this.serverError = "";
-                this.tooManyRequests = false;
-                this.processingServerSide = true;
-                const req = new XMLHttpRequest();
-                req.onreadystatechange = (event: Event): void => {
-                    if (req.readyState === XMLHttpRequest.DONE) {
-                        if (req.status === 200) {
-                            this.dd = JSON.parse(req.responseText);
-                            this.gotData = true;
-                        } else if (req.status === 429) {
-                            this.tooManyRequests = true;
-                        } else {
-                            this.serverError = req.responseText;
-                        }
-                        this.processingServerSide = false;
+export default Vue.extend({
+  name: "Main",
+  props: {
+    urlString: String
+  },
+  components: {
+    Icon
+  },
+  data() {
+    return {
+      userAgent: uaFromURLString(this.urlString ? decodeURIComponent(this.urlString) : navigator.userAgent),
+      dd: {} as ParsedData,
+      gotData: false,
+      useCh: false,
+      clientHints: "",
+      processingServerSide: false,
+      showJSON: false,
+      tooManyRequests: false,
+      serverError: ""
+    };
+  },
+  computed: {
+    prettyJSON(): string {
+      return syntaxHighlight(JSON.stringify(this.dd, null, 2));
+    }
+  },
+  methods: {
+    submit(): void {
+      console.info(buildURLString(this.userAgent, this.clientHints))
+      this.$router.replace({
+        name: "main",
+        params: {urlString: buildURLString(this.userAgent, this.useCh ? this.clientHints : undefined)}
+      });
+    },
+    clear(): void {
+      this.userAgent = "";
+      const input = this.$refs.input as HTMLInputElement;
+      input.focus();
+    },
+    fetchData(urlstring: string): void {
+      this.gotData = false;
+      this.serverError = "";
+      this.tooManyRequests = false;
+      this.processingServerSide = true;
+      const req = new XMLHttpRequest();
+      req.onreadystatechange = (event: Event): void => {
+        if (req.readyState === XMLHttpRequest.DONE) {
+          if (req.status === 200) {
+            this.dd = JSON.parse(req.responseText);
+            this.gotData = true;
+          } else if (req.status === 429) {
+            this.tooManyRequests = true;
+          } else {
+            this.serverError = req.responseText;
+          }
+          this.processingServerSide = false;
 
-                    }
-                };
-                req.open("GET", baseURL + "?ua=" + ua, true);
-                req.send(null);
-            }
+        }
+      };
+      const ua=uaFromURLString(urlstring);
+      let requestURL = baseURL + "?ua=" + ua;
+      if (this.useCh) {
+        requestURL += "&ch=" + encodeURI(this.clientHints)
+      }
+      req.open("GET", requestURL, true);
+      req.send(null);
+    }
         },
         watch: {
-            ua(val: string): void {
+            urlString(val: string): void {
                 if (!val) {
                     this.userAgent = navigator.userAgent;
                     this.submit();
@@ -165,15 +187,23 @@
             }
         },
         mounted(): void {
-            if (this.ua) {
-                this.fetchData(this.ua);
-            } else {
-                this.submit();
+          if (!this.clientHints) {
+            this.clientHints = JSON.stringify(placeholderClientHints());
+          }
+          if (this.urlString) {
+            const ch = chFromURLString(this.urlString);
+            this.useCh = !!ch;
+            if (ch) {
+              this.clientHints = ch;
             }
-            if (localStorage.showJSON) {
-                this.showJSON = !!localStorage.showJSON;
-            }
-            document.title = "Device Detector Demo";
+            this.fetchData(uaFromURLString(this.urlString));
+          } else {
+            this.submit();
+          }
+          if (localStorage.showJSON) {
+            this.showJSON = !!localStorage.showJSON;
+          }
+          document.title = "Device Detector Demo";
         }
     });
 </script>

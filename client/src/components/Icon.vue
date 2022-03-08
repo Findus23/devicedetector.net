@@ -6,8 +6,16 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    props: ["icon", "title"],
-    name: "Icon"
+  props: {
+    icon: {
+      type: String
+    },
+    title: {
+      type: String
+    }
+  },
+  // props: ["icon", "title"],
+  name: "Icon"
 });
 </script>
 
