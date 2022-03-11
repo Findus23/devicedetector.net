@@ -187,18 +187,6 @@ export default Vue.extend({
             }
         },
         mounted(): void {
-          if (!this.clientHints) {
-
-            if (typeof navigator.userAgentData!== 'undefined' && (typeof navigator.userAgentData.getHighEntropyValues!== 'undefined')) {
-
-              navigator.userAgentData.getHighEntropyValues(
-                  ['brands', 'model', 'platform', 'platformVersion', 'uaFullVersion', 'fullVersionList']
-              ).then(ua=> {
-                this.clientHints = JSON.stringify(ua);
-
-              });
-            }
-          }
           if (this.urlString) {
             const ch = chFromURLString(this.urlString);
             this.useCh = !!ch;
@@ -208,6 +196,17 @@ export default Vue.extend({
             this.fetchData(uaFromURLString(this.urlString));
           } else {
             this.submit();
+          }
+          if (!this.clientHints) {
+            if (typeof navigator.userAgentData!== 'undefined' && (typeof navigator.userAgentData.getHighEntropyValues!== 'undefined')) {
+
+              navigator.userAgentData.getHighEntropyValues(
+                  ['brands', 'model', 'platform', 'platformVersion', 'uaFullVersion', 'fullVersionList']
+              ).then(ua=> {
+                this.clientHints = JSON.stringify(ua);
+                this.submit();
+              });
+            }
           }
           if (localStorage.showJSON) {
             this.showJSON = !!localStorage.showJSON;

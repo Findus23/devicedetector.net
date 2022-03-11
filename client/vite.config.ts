@@ -12,6 +12,7 @@ export default defineConfig({
             "/detect": "http://local.devicedetector.net/",
             "/supported": "http://local.devicedetector.net/",
             "/icons": "http://local.devicedetector.net/",
+            "/from-header": "http://local.devicedetector.net/",
             "/version.json": "http://local.devicedetector.net/"
         }
     },
