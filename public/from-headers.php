@@ -4,7 +4,6 @@ $mode = (empty($_GET["mode"])) ? "set-header" : $_GET["mode"];
 
 
 if ($mode == "read-header") {
-    echo "<pre>";
     $userAgent = empty($_SERVER["HTTP_USER_AGENT"]) ? "" : $_SERVER["HTTP_USER_AGENT"];
     $text = "";
     foreach ($_SERVER as $var => $value) {
