@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {SupportedList} from "@/interfaces";
+import {SupportedList} from "../interfaces";
 
 const supportedURL = "/supported/";
 

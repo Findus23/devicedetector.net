@@ -60,7 +60,7 @@
 
 <script lang="ts">
     import Vue from "vue";
-    import {Version} from "@/interfaces";
+    import {Version} from "./interfaces";
     // @ts-ignore
     import {NavbarPlugin} from "bootstrap-vue";
     Vue.use(NavbarPlugin);
