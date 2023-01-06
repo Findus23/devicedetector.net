@@ -6,7 +6,13 @@ import {BootstrapVue3Resolver} from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
     plugins: [
-        vue(),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    includeAbsolute: false
+                }
+            }
+        }),
         Components({
             resolvers: [BootstrapVue3Resolver()]
         }),
@@ -25,7 +31,7 @@ export default defineConfig({
         sourcemap: true,
         target: "es2019",
         rollupOptions:{
-            external: /icons.*/
+            // external: /icons.*/
         }
     }
 })
