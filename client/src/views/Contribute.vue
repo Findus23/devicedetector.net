@@ -40,10 +40,17 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import Vue, {defineComponent} from "vue";
+import {uaFromURLString} from "@/utils";
+import {ParsedData} from "@/interfaces";
 
-export default Vue.extend({
+export default defineComponent({
     name: "contribute",
+    data() {
+        return {
+            value: "test"
+        };
+    },
     mounted(): void {
         document.title = "Contribute | Device Detector";
     }

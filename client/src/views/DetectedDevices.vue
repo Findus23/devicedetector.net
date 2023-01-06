@@ -32,12 +32,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, {defineComponent} from "vue";
 import {SupportedList} from "../interfaces";
 
 const supportedURL = "/supported/";
 
-export default Vue.extend({
+export default defineComponent({
   name: "about",
   props: ["lastUpdated"],
   data() {

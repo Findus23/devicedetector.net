@@ -2,12 +2,12 @@
     <div id="app">
         <div class="content">
             <div>
-                <b-navbar toggleable="lg" type="dark">
+                <b-navbar toggleable="lg" dark="true">
                     <b-navbar-brand :to="{name:'main'}">Device Detector</b-navbar-brand>
 
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-                    <b-collapse id="nav-collapse" is-nav>
+                    <b-collapse id="nav-collapse" class="navbar-collapse">
                         <b-navbar-nav>
                             <b-nav-item :to="{name:'main'}" :linkClasses="{active:$route.name==='main'}">
                                 Home
@@ -59,15 +59,15 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
+import Vue, {defineComponent} from "vue";
     import {Version} from "./interfaces";
     // @ts-ignore
-    import {NavbarPlugin} from "bootstrap-vue";
-    Vue.use(NavbarPlugin);
+    // import {NavbarPlugin} from "bootstrap-vue";
+    // Vue.use(NavbarPlugin);
 
     const versionJSON = "/version.json";
 
-    export default Vue.extend({
+    export default defineComponent({
         name: "Main",
         data() {
             return {
@@ -101,9 +101,6 @@
 <style lang="scss">
     @import "scss/style";
 
-    body {
-        background: $bg-color;
-    }
 
     nav.navbar {
         background: $navbar-background;

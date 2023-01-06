@@ -92,20 +92,20 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, {defineComponent} from "vue";
 import {ParsedData} from "../interfaces";
 import Icon from "../components/Icon.vue";
 import {buildURLString, chFromURLString, syntaxHighlight, uaFromURLString} from "../utils";
-import {FormCheckboxPlugin, ButtonPlugin, FormInputPlugin, FormTextareaPlugin, InputGroupPlugin} from "bootstrap-vue";
+// import {FormCheckboxPlugin, ButtonPlugin, FormInputPlugin, FormTextareaPlugin, InputGroupPlugin} from "bootstrap-vue";
 
-Vue.use(InputGroupPlugin);
-Vue.use(FormInputPlugin);
-Vue.use(ButtonPlugin);
-Vue.use(FormCheckboxPlugin);
-Vue.use(FormTextareaPlugin);
+// Vue.use(InputGroupPlugin);
+// Vue.use(FormInputPlugin);
+// Vue.use(ButtonPlugin);
+// Vue.use(FormCheckboxPlugin);
+// Vue.use(FormTextareaPlugin);
 const baseURL = "/detect/";
 
-export default Vue.extend({
+export default defineComponent({
   name: "Main",
   props: {
     urlString: String
@@ -245,8 +245,8 @@ pre {
 }
 
 .clearButton {
-  font-weight: bold;
-  margin-left: -35px;
+  font-weight: bold !important;
+  margin-left: -35px !important;
   z-index: 100 !important;
 }
 

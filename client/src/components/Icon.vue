@@ -3,9 +3,9 @@
          role="presentation" :alt="title" class="icon" width="48" height="48">
 </template>
 <script lang="ts">
-import Vue from "vue";
+import {defineComponent} from "vue";
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     icon: {
       type: String

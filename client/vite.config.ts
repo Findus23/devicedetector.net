@@ -1,10 +1,15 @@
-import {createVuePlugin} from 'vite-plugin-vue2'
+import vue from '@vitejs/plugin-vue'
 import {defineConfig} from 'vite'
 import pluginRewriteAll from 'vite-plugin-rewrite-all'
+import Components from 'unplugin-vue-components/vite'
+import {BootstrapVue3Resolver} from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
     plugins: [
-        createVuePlugin(),
+        vue(),
+        Components({
+            resolvers: [BootstrapVue3Resolver()]
+        }),
         pluginRewriteAll()
     ],
     server: {
@@ -18,6 +23,9 @@ export default defineConfig({
     },
     build: {
         sourcemap: true,
-        target: "es2019"
+        target: "es2019",
+        rollupOptions:{
+            external: /icons.*/
+        }
     }
 })
