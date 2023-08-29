@@ -2,21 +2,13 @@
     <img v-if="icon" :src="icon" :title="title"
          role="presentation" :alt="title" class="icon" width="48" height="48">
 </template>
-<script lang="ts">
-import {defineComponent} from "vue";
+<script setup lang="ts">
+import {  } from "vue";
 
-export default defineComponent({
-  props: {
-    icon: {
-      type: String
-    },
-    title: {
-      type: String
-    }
-  },
-  // props: ["icon", "title"],
-  name: "Icon"
-});
+defineProps<{
+    icon?: string
+    title?: string
+}>();
 </script>
 
 <style lang="scss">

@@ -31,37 +31,33 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue, {defineComponent} from "vue";
+<script setup lang="ts">
+import {onMounted, ref} from "vue";
 import {SupportedList} from "../interfaces";
 
 const supportedURL = "/supported/";
 
-export default defineComponent({
-  name: "about",
-  props: ["lastUpdated"],
-  data() {
-    return {
-      supported: {} as SupportedList,
-      tooManyRequests: false
-    };
-  },
-  mounted(): void {
+defineProps<{
+    "lastUpdated"?: any
+}>();
+
+const supported = ref({} as SupportedList);
+const tooManyRequests = ref(false);
+
+onMounted(() => {
     document.title = "Detected Devices | Device Detector";
     const req = new XMLHttpRequest();
     req.onreadystatechange = (event: Event): void => {
-      if (req.readyState === XMLHttpRequest.DONE) {
-        if (req.status === 200) {
-          this.supported = JSON.parse(req.responseText);
-        } else if (req.status === 429) {
-          this.tooManyRequests = true;
+        if (req.readyState === XMLHttpRequest.DONE) {
+            if (req.status === 200) {
+                supported.value = JSON.parse(req.responseText);
+            } else if (req.status === 429) {
+                tooManyRequests.value = true;
+            }
         }
-      }
     };
 
     req.open("GET", supportedURL, true);
     req.send(null);
-  }
-
 });
 </script>

@@ -9,11 +9,15 @@
 
         <h2>Improvements</h2>
 
-        <p>You have a User Agent that is not detected or detected incorrectly? Then please <a href="https://github.com/matomo-org/device-detector">open an issue on the Device Detector repostiory.</a></p>
+        <p>You have a User Agent that is not detected or detected incorrectly? Then please <a
+            href="https://github.com/matomo-org/device-detector">open an issue on the Device Detector repostiory.</a>
+        </p>
 
-        <p>You have seen an incorrect/missing/ugly icon? Then please report it <a href="https://github.com/matomo-org/matomo-icons">on the matomo-icons repository</a>.</p>
+        <p>You have seen an incorrect/missing/ugly icon? Then please report it <a
+            href="https://github.com/matomo-org/matomo-icons">on the matomo-icons repository</a>.</p>
 
-        <p>You have found a bug in this website? Then please report it <a href="https://github.com/Findus23/devicedetector.net">in the devicedetector.net repository</a>.</p>
+        <p>You have found a bug in this website? Then please report it <a
+            href="https://github.com/Findus23/devicedetector.net">in the devicedetector.net repository</a>.</p>
 
         <h2>Listing all user agents from your logs</h2>
 
@@ -23,9 +27,10 @@
         </p>
 
         <pre><code><span class="keyword">zcat</span> <span class="path">~/path/to/access/logs*</span> | <span
-                class="keyword">awk</span> -F'<span class="string">"</span>' '<span class="string">{print $6}</span>' | <span
-                class="keyword">sort</span> | <span class="keyword">uniq</span> -c | <span class="keyword">sort</span> -rn | <span
-                class="keyword">head</span> -n20000 > top-user-agents.txt</code></pre>
+            class="keyword">awk</span> -F'<span class="string">"</span>' '<span
+            class="string">{print $6}</span>' | <span
+            class="keyword">sort</span> | <span class="keyword">uniq</span> -c | <span class="keyword">sort</span> -rn | <span
+            class="keyword">head</span> -n20000 > top-user-agents.txt</code></pre>
 
         <h2>Contributors</h2>
 
@@ -39,21 +44,12 @@
         <p>We are looking forward to your contributions and pull requests!</p>
     </div>
 </template>
-<script lang="ts">
-import Vue, {defineComponent} from "vue";
-import {uaFromURLString} from "@/utils";
-import {ParsedData} from "@/interfaces";
+<script setup lang="ts">
+import {onMounted} from "vue";
 
-export default defineComponent({
-    name: "contribute",
-    data() {
-        return {
-            value: "test"
-        };
-    },
-    mounted(): void {
-        document.title = "Contribute | Device Detector";
-    }
+
+onMounted(() => {
+    document.title = "Contribute | Device Detector";
 });
 </script>
 
