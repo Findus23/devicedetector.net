@@ -2,7 +2,7 @@
     <div id="app">
         <div class="content">
             <div>
-                <b-navbar toggleable="lg" dark="true">
+                <b-navbar toggleable="lg" v-b-color-mode="'dark'">
                     <b-navbar-brand :to="{name:'main'}">Device Detector</b-navbar-brand>
 
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

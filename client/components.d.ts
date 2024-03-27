@@ -7,20 +7,23 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    BButton: typeof import('bootstrap-vue-3')['BButton']
-    BCollapse: typeof import('bootstrap-vue-3')['BCollapse']
-    BFormCheckbox: typeof import('bootstrap-vue-3')['BFormCheckbox']
-    BFormInput: typeof import('bootstrap-vue-3')['BFormInput']
-    BFormTextarea: typeof import('bootstrap-vue-3')['BFormTextarea']
-    BInputGroup: typeof import('bootstrap-vue-3')['BInputGroup']
-    BInputGroupAppend: typeof import('bootstrap-vue-3')['BInputGroupAppend']
-    BNavbar: typeof import('bootstrap-vue-3')['BNavbar']
-    BNavbarBrand: typeof import('bootstrap-vue-3')['BNavbarBrand']
-    BNavbarNav: typeof import('bootstrap-vue-3')['BNavbarNav']
-    BNavbarToggle: typeof import('bootstrap-vue-3')['BNavbarToggle']
-    BNavItem: typeof import('bootstrap-vue-3')['BNavItem']
+    BButton: typeof import('bootstrap-vue-next')['BButton']
+    BCollapse: typeof import('bootstrap-vue-next')['BCollapse']
+    BFormCheckbox: typeof import('bootstrap-vue-next')['BFormCheckbox']
+    BFormInput: typeof import('bootstrap-vue-next')['BFormInput']
+    BFormTextarea: typeof import('bootstrap-vue-next')['BFormTextarea']
+    BInputGroup: typeof import('bootstrap-vue-next')['BInputGroup']
+    BInputGroupAppend: typeof import('bootstrap-vue-next')['BInputGroupAppend']
+    BNavbar: typeof import('bootstrap-vue-next')['BNavbar']
+    BNavbarBrand: typeof import('bootstrap-vue-next')['BNavbarBrand']
+    BNavbarNav: typeof import('bootstrap-vue-next')['BNavbarNav']
+    BNavbarToggle: typeof import('bootstrap-vue-next')['BNavbarToggle']
+    BNavItem: typeof import('bootstrap-vue-next')['BNavItem']
     Icon: typeof import('./src/components/Icon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+  }
+  export interface ComponentCustomProperties {
+    vBColorMode: typeof import('bootstrap-vue-next')['vBColorMode']
   }
 }

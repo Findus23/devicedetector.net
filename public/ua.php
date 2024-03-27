@@ -85,6 +85,7 @@ if (!empty($_GET["ch"])) {
 } else {
 //    $clientHints = CustomClientHints::factory($_SERVER);
     $clientHints = new CustomClientHints();
+    $headers = NULL;
 }
 
 //sec-ch-ua: "(Not(A:Brand";v="8", "Chromium";v="98"

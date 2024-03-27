@@ -1,11 +1,11 @@
 {
   "require": {
     "matomo/device-detector": "dev-master",
-    "symfony/cache": "^6.0",
+    "symfony/cache": "^v7.0.4",
     "ext-json": "*",
     "ext-redis": "*",
     "ext-curl": "*",
-    "symfony/yaml": "^6.0"
+    "symfony/yaml": "^v7.0.3"
   },
   "autoload": {
     "psr-4": {
