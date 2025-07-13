@@ -29,6 +29,10 @@
                 <h2>TypeScript/Javascript</h2>
                 <a class="source" href="https://github.com/etienne-martin/device-detector-js">Source</a>
                 <pre><code><span class="keyword">npm</span> install device-detector-js</code></pre>
+                 <p>Another library that you can use on server side with nodeJS is:</p>
+                <a class="source2" href="https://github.com/sanchezzzhak/node-device-detector">Source</a>
+                <pre><code><span class="keyword">npm</span> install node-device-detector</code></pre>
+
             </div>
             <div class="box">
                 <h2>Python 3</h2>
@@ -100,8 +104,15 @@ import Vue, {defineComponent} from "vue";
 
             .source {
                 position: absolute;
-                top: 10px;
+                top: 4px;
                 right: 10px;
+            }
+
+            .source2 {
+                display: flex;
+                justify-content: end;
+                margin-right: -10px;
+                padding-bottom: 10px;
             }
         }
     }
