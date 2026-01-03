@@ -11,22 +11,22 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BButton: typeof import('bootstrap-vue-next')['BButton']
-    BCollapse: typeof import('bootstrap-vue-next')['BCollapse']
-    BFormCheckbox: typeof import('bootstrap-vue-next')['BFormCheckbox']
-    BFormInput: typeof import('bootstrap-vue-next')['BFormInput']
-    BFormTextarea: typeof import('bootstrap-vue-next')['BFormTextarea']
-    BInputGroup: typeof import('bootstrap-vue-next')['BInputGroup']
-    BNavbar: typeof import('bootstrap-vue-next')['BNavbar']
-    BNavbarBrand: typeof import('bootstrap-vue-next')['BNavbarBrand']
-    BNavbarNav: typeof import('bootstrap-vue-next')['BNavbarNav']
-    BNavbarToggle: typeof import('bootstrap-vue-next')['BNavbarToggle']
-    BNavItem: typeof import('bootstrap-vue-next')['BNavItem']
+    BButton: typeof import('bootstrap-vue-next/components/BButton')['BButton']
+    BCollapse: typeof import('bootstrap-vue-next/components/BCollapse')['BCollapse']
+    BFormCheckbox: typeof import('bootstrap-vue-next/components/BFormCheckbox')['BFormCheckbox']
+    BFormInput: typeof import('bootstrap-vue-next/components/BFormInput')['BFormInput']
+    BFormTextarea: typeof import('bootstrap-vue-next/components/BFormTextarea')['BFormTextarea']
+    BInputGroup: typeof import('bootstrap-vue-next/components/BInputGroup')['BInputGroup']
+    BNavbar: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbar']
+    BNavbarBrand: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbarBrand']
+    BNavbarNav: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbarNav']
+    BNavbarToggle: typeof import('bootstrap-vue-next/components/BNavbar')['BNavbarToggle']
+    BNavItem: typeof import('bootstrap-vue-next/components/BNav')['BNavItem']
     Icon: typeof import('./src/components/Icon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
   export interface GlobalDirectives {
-    vBColorMode: typeof import('bootstrap-vue-next')['vBColorMode']
+    vBColorMode: typeof import('bootstrap-vue-next/directives/BColorMode')['vBColorMode']
   }
 }

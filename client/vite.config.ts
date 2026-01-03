@@ -1,7 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import {defineConfig} from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import {BootstrapVueNextResolver} from "unplugin-vue-components/resolvers";
+import { BootstrapVueNextResolver } from 'bootstrap-vue-next'
 
 export default defineConfig({
     plugins: [
