@@ -199,9 +199,21 @@ export default defineComponent({
       if (typeof navigator.userAgentData !== 'undefined' && (typeof navigator.userAgentData.getHighEntropyValues !== 'undefined')) {
 
         navigator.userAgentData.getHighEntropyValues(
-            ['brands', 'model', 'platform', 'platformVersion', 'uaFullVersion', 'fullVersionList']
+            [
+                'architecture',
+                'bitness',
+                'formFactors',
+                'brands',
+                'mobile',
+                'model',
+                'platform',
+                'platformVersion',
+                'uaFullVersion',
+                'fullVersionList',
+                'wow64'
+            ]
         ).then(ua => {
-          this.clientHints = JSON.stringify(ua);
+          this.clientHints = JSON.stringify(ua,null,"  ");
           this.submit();
         });
       }

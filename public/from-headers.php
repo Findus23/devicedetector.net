@@ -2,6 +2,25 @@
 
 $mode = (empty($_GET["mode"])) ? "set-header" : $_GET["mode"];
 
+$allHeaders = [
+//    from https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers
+    "Sec-CH-UA",
+    "Sec-CH-UA-Arch",
+    "Sec-CH-UA-Bitness",
+    "Sec-CH-UA-Form-Factors",
+    "Sec-CH-UA-Full-Version",
+    "Sec-CH-UA-Full-Version-List",
+    "Sec-CH-UA-Mobile",
+    "Sec-CH-UA-Platform-Version",
+    "Sec-CH-UA-WoW64",
+    "Sec-CH-Prefers-Color-Scheme",
+    "Sec-CH-Prefers-Reduced-Motion",
+    "Sec-CH-Prefers-Reduced-Transparency",
+    "Sec-CH-Device-Memory",
+    "Sec-CH-DPR",
+    "Sec-CH-Viewport-Width",
+    "Sec-CH-Width"
+];
 
 if ($mode == "read-header") {
     $userAgent = empty($_SERVER["HTTP_USER_AGENT"]) ? "" : $_SERVER["HTTP_USER_AGENT"];
@@ -19,7 +38,7 @@ if ($mode == "read-header") {
     }
     header('Location: ' . $url, true, 302);
 } else {
-    header('Accept-CH: Sec-CH-UA-Full-Version, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Arch', true);
+    header('Accept-CH: ' . implode(", ", $allHeaders), true);
     header('Location: ?mode=read-header', true, 302);
 }
 
