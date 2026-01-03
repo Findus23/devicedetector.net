@@ -1,0 +1,13 @@
+devicedetector.lw1.at {
+        import all-sites
+        root * /var/www/devicedetector/public/
+        php_fastcgi unix//run/php/php8.4-fpm.sock 
+        try_files {path} /index.html
+        file_server
+        rewrite /detect/ /ua.php
+        rewrite /supported/ /supported.php
+        rewrite /from-headers/ /from-headers.php
+}
+
+# vim: set ft=caddyfile:
+
