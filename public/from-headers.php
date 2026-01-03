@@ -19,7 +19,7 @@ if ($mode == "read-header") {
     }
     header('Location: ' . $url, true, 302);
 } else {
-    header('Accept-CH: Sec-CH-UA-Full-Version, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Arc', true);
+    header('Accept-CH: Sec-CH-UA-Full-Version, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-Model, Sec-CH-UA-Arch', true);
     header('Location: ?mode=read-header', true, 302);
 }
 

@@ -23,6 +23,8 @@ class CustomClientHints extends ClientHints
     {
         return [
             "architecture" => $this->architecture,
+            "app" => $this->app,
+            "formFactors" => $this->formFactors,
             "bitness" => $this->bitness,
             "mobile" => $this->mobile,
             "model" => $this->model,
@@ -44,7 +46,9 @@ class CustomClientHints extends ClientHints
             $ch->fullVersionList,
             $ch->mobile,
             $ch->architecture,
-            $ch->bitness
+            $ch->bitness,
+            $ch->app,
+            $ch->formFactors
         );
     }
 
@@ -61,6 +65,7 @@ if (!empty($_GET["ch"])) {
     if (strpos($ch_string, "{") === 0) {
         $data = json_decode($_GET["ch"], true);
         unset($data['brands']);
+        unset($data['wow64']);
         $clientHints = new CustomClientHints(...$data);
         $headers = NULL;
     } else {
