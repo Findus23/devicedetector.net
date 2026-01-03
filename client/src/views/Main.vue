@@ -5,12 +5,10 @@
       <b-input-group class="mt-3">
         <b-form-input type="text" ref="input" v-model="userAgent"
                       :disabled="processingServerSide"></b-form-input>
-        <b-input-group-append>
           <button class="btn clearButton" @click="clear" type="button">
             &times;
           </button>
           <b-button type="submit" variant="primary" :disabled="processingServerSide">Detect!</b-button>
-        </b-input-group-append>
       </b-input-group>
       <b-form-checkbox
           id="checkbox-1"
