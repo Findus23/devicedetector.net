@@ -135,7 +135,8 @@ if ($dd->isBot()) {
             "brand" => $icons->getBrandLogo()
         ],
         "clientHints" => $clientHints->toDict(),
-        "headers" => $headers
+        "headers" => $headers,
+        "userAgent" => $userAgent,
     ];
 }
 
